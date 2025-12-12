@@ -1,0 +1,204 @@
+<section id="services" class="py-20 bg-white relative overflow-hidden">
+  <!-- Effet de fond -->
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50 to-transparent opacity-50"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16"
+         [class.animate-slide-up]="servicesVisible"
+         [class.opacity-0]="!servicesVisible">
+      <h2 class="section-title">Mes Services</h2>
+      <p class="section-subtitle">Des solutions adaptées à vos besoins</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <!-- Offre 1: WordPress -->
+      <div class="service-card group"
+           [class.animate-slide-in-left]="servicesVisible"
+           [class.opacity-0]="!servicesVisible">
+        <div class="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+          🌐
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+          Sites WordPress Administrables
+        </h3>
+        <p class="text-gray-600 mb-6">
+          Sites vitrines professionnels, entièrement administrables par vos soins grâce à WordPress et des blocs personnalisés.
+        </p>
+        <ul class="space-y-3 mb-6">
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">Site vitrine (pack 5 pages standard)</span>
+          </li>
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">WordPress avec blocs personnalisés (ACF Pro)</span>
+          </li>
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">Design 100% responsive (mobile, tablette, desktop)</span>
+          </li>
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">SEO technique de base (structure Hn, meta, sitemap)</span>
+          </li>
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">Formulaire de contact intégré</span>
+          </li>
+          <li class="flex items-start transform hover:translate-x-2 transition-transform">
+            <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-gray-700">Formation pour gérer vos contenus en autonomie</span>
+          </li>
+        </ul>
+        <div class="border-t pt-4">
+          <p class="text-xl font-bold text-blue-600">À partir de ~1 500 € HT</p>
+          <p class="text-sm text-gray-500">Pack site vitrine 5 pages</p>
+        </div>
+      </div>
+
+      <!-- Offre 2: Java/Spring/Angular -->
+      <div class="service-card group border-2 border-blue-500 relative overflow-hidden"
+           [class.animate-slide-in-right]="servicesVisible"
+           [class.opacity-0]="!servicesVisible"
+           style="animation-delay: 0.2s">
+        <div class="absolute top-4 right-4 z-20">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse-slow">
+            Sur mesure
+          </span>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="relative z-10">
+          <div class="text-5xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+            ⚡
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
+            Applications Java / Spring / Angular
+          </h3>
+          <p class="text-gray-600 mb-6">
+            Développement d'applications web sur mesure avec backend robuste et interface moderne.
+          </p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Backend Java / Spring Boot (API REST, logique métier)</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Frontend Angular 17+ (interface moderne et réactive)</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Sécurité : Spring Security, JWT, gestion des rôles</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Base de données : MySQL / PostgreSQL</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Tests : TU/TI backend, TU frontend, E2E (Cypress)</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">CI/CD avec GitHub Actions</span>
+            </li>
+            <li class="flex items-start transform hover:translate-x-2 transition-transform">
+              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-gray-700">Idéal pour MVP SaaS, outils métiers, portails internes</span>
+            </li>
+          </ul>
+          <div class="border-t pt-4">
+            <p class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              TJM : 350 - 400 € / jour
+            </p>
+            <p class="text-sm text-gray-500">Tarification sur devis selon complexité</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Maintenance -->
+    <div class="mt-16 max-w-4xl mx-auto"
+         [class.animate-fade-in-up]="servicesVisible"
+         [class.opacity-0]="!servicesVisible"
+         style="animation-delay: 0.4s">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-bold text-gray-900 mb-4">Maintenance & Accompagnement</h3>
+        <p class="text-lg text-gray-600">
+          Pour assurer la pérennité de votre solution, je propose des services de maintenance et d'accompagnement.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gradient-to-br from-white to-blue-50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+          <h4 class="text-xl font-bold text-gray-900 mb-3">Maintenance WordPress</h4>
+          <ul class="text-left space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Mises à jour régulières (core, plugins, thème)
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Sauvegardes automatiques
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Petites corrections et ajustements
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Monitoring et sécurité
+            </li>
+          </ul>
+        </div>
+        <div class="bg-gradient-to-br from-white to-purple-50 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+          <h4 class="text-xl font-bold text-gray-900 mb-3">TMA Applications Java/Angular</h4>
+          <ul class="text-left space-y-2 text-gray-600">
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Support et corrections de bugs
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Évolutions fonctionnelles
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Optimisations performances
+            </li>
+            <li class="flex items-center">
+              <span class="text-blue-600 mr-2">✓</span>
+              Accompagnement technique
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-sm text-gray-500 mt-6 text-center">Optionnel mais recommandé • Tarification sur devis mensuel ou forfait</p>
+    </div>
+  </div>
+</section>

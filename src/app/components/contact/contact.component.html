@@ -1,0 +1,152 @@
+<section id="contact" class="py-20 bg-white relative overflow-hidden">
+  <!-- Décorations -->
+  <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-50 via-transparent to-purple-50 opacity-30"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12 animate-fade-in">
+        <h2 class="section-title">Contactez-moi</h2>
+        <p class="section-subtitle">Un projet de site vitrine ou d'application web ? Parlons-en.</p>
+      </div>
+
+      <!-- Success Message avec animation -->
+      <div *ngIf="formSubmitted"
+           class="mb-6 p-4 bg-gradient-to-r from-green-100 to-green-200 border-2 border-green-400 text-green-800 rounded-xl animate-bounce-in flex items-center">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage"
+           class="mb-6 p-4 bg-gradient-to-r from-red-100 to-red-200 border-2 border-red-400 text-red-800 rounded-xl animate-shake flex items-center">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        {{ errorMessage }}
+      </div>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmitContact()"
+            class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-100 animate-slide-up">
+        <!-- Nom -->
+        <div class="mb-6 group">
+          <label for="name" class="block text-gray-700 font-semibold mb-2 group-focus-within:text-blue-600 transition-colors">
+            Nom *
+          </label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-300"
+            [class.border-red-500]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+            [class.animate-shake]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+            placeholder="Votre nom"
+          >
+          <p *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+             class="text-red-500 text-sm mt-1 animate-slide-down">
+            Le nom est requis
+          </p>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-6 group">
+          <label for="email" class="block text-gray-700 font-semibold mb-2 group-focus-within:text-blue-600 transition-colors">
+            Email *
+          </label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-300"
+            [class.border-red-500]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+            [class.animate-shake]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+            placeholder="votre.email@exemple.fr"
+          >
+          <p *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+             class="text-red-500 text-sm mt-1 animate-slide-down">
+            Un email valide est requis
+          </p>
+        </div>
+
+        <!-- Type de projet -->
+        <div class="mb-6 group">
+          <label for="projectType" class="block text-gray-700 font-semibold mb-2 group-focus-within:text-blue-600 transition-colors">
+            Type de projet *
+          </label>
+          <select
+            id="projectType"
+            formControlName="projectType"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-blue-300"
+            [class.border-red-500]="contactForm.get('projectType')?.invalid && contactForm.get('projectType')?.touched"
+            [class.animate-shake]="contactForm.get('projectType')?.invalid && contactForm.get('projectType')?.touched"
+          >
+            <option value="">Sélectionnez un type de projet</option>
+            <option value="wordpress">Site WordPress</option>
+            <option value="java-angular">Application Java/Angular</option>
+            <option value="maintenance">Maintenance / TMA</option>
+            <option value="autre">Autre</option>
+          </select>
+          <p *ngIf="contactForm.get('projectType')?.invalid && contactForm.get('projectType')?.touched"
+             class="text-red-500 text-sm mt-1 animate-slide-down">
+            Le type de projet est requis
+          </p>
+        </div>
+
+        <!-- Message -->
+        <div class="mb-6 group">
+          <label for="message" class="block text-gray-700 font-semibold mb-2 group-focus-within:text-blue-600 transition-colors">
+            Message *
+          </label>
+          <textarea
+            id="message"
+            formControlName="message"
+            rows="5"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-300 hover:border-blue-300"
+            [class.border-red-500]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+            [class.animate-shake]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+            placeholder="Décrivez votre projet..."
+          ></textarea>
+          <p *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
+             class="text-red-500 text-sm mt-1 animate-slide-down">
+            Le message est requis
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full btn-primary group relative overflow-hidden"
+          [disabled]="isLoading || formSubmitted"
+          [class.opacity-50]="isLoading || formSubmitted"
+          [class.cursor-not-allowed]="isLoading || formSubmitted"
+        >
+          <span class="relative z-10 flex items-center justify-center">
+            <svg *ngIf="isLoading" class="animate-spin h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            {{ isLoading ? 'Envoi en cours...' : (formSubmitted ? 'Message envoyé !' : 'Envoyer le message') }}
+            <svg *ngIf="!isLoading && !formSubmitted" class="ml-2 w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+            <svg *ngIf="formSubmitted" class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </span>
+        </button>
+
+        <p class="text-sm text-gray-500 mt-4 text-center">
+          Ou contactez-moi directement :
+          <a href="mailto:derisbourgarnaud@gmail.com" class="text-blue-600 hover:text-blue-700 hover:underline transition-colors font-medium">
+            [ton.email&#64;pro.fr]
+          </a>
+          /
+          <a href="tel:+33xxxxxxxxx" class="text-blue-600 hover:text-blue-700 hover:underline transition-colors font-medium">
+            [06 xx xx xx xx]
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,123 @@
+<section id="about" class="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden">
+  <!-- Particules flottantes -->
+  <div class="absolute inset-0">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-blue-300/20 rounded-full animate-float"></div>
+    <div class="absolute bottom-20 right-20 w-48 h-48 bg-purple-300/20 rounded-full animate-float-delay"></div>
+    <div class="absolute top-1/2 right-1/3 w-24 h-24 bg-pink-300/20 rounded-full animate-float-slow"></div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12 animate-fade-in">
+        <h2 class="section-title">À propos</h2>
+        <p class="section-subtitle">Développeur web freelance passionné par les technologies modernes</p>
+      </div>
+
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12 mb-12 transform hover:scale-105 transition-all duration-500 animate-slide-up">
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Développeur web freelance spécialisé en <strong class="text-blue-600">WordPress</strong>,
+          <strong class="text-blue-600">Java</strong>, <strong class="text-blue-600">Spring Boot</strong> et
+          <strong class="text-blue-600">Angular 17+</strong>,
+          j'accompagne les TPE/PME, indépendants et clients B2B dans leurs projets de développement web.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Que ce soit pour un site vitrine administrable ou une application métier sur mesure, je m'engage à livrer
+          des solutions de qualité professionnelle, maintenables et évolutives.
+        </p>
+      </div>
+
+      <!-- Compétences techniques avec animations -->
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12 animate-slide-up" style="animation-delay: 0.2s">
+        <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Compétences Techniques
+        </h3>
+
+        <div class="space-y-6">
+          <!-- Backend -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">💻</span>
+              Backend
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('backend')"
+                    class="skill-badge bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 hover:from-blue-200 hover:to-blue-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Frontend -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-2">🎨</span>
+              Frontend
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('frontend')"
+                    class="skill-badge bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 hover:from-purple-200 hover:to-purple-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- CMS -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-2">🌐</span>
+              CMS
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('cms')"
+                    class="skill-badge bg-gradient-to-r from-green-100 to-green-200 text-green-800 hover:from-green-200 hover:to-green-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Database -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mr-2">🗄️</span>
+              Base de données
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('database')"
+                    class="skill-badge bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 hover:from-orange-200 hover:to-orange-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- DevOps & Tools -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2">⚙️</span>
+              DevOps & Tools
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('devops').concat(getSkillsByCategory('tools'))"
+                    class="skill-badge bg-gradient-to-r from-indigo-100 to-indigo-200 text-indigo-800 hover:from-indigo-200 hover:to-indigo-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Testing -->
+          <div class="transform hover:translate-x-2 transition-all duration-300">
+            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center">
+              <span class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-2">✅</span>
+              Tests
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let skill of getSkillsByCategory('testing')"
+                    class="skill-badge bg-gradient-to-r from-red-100 to-red-200 text-red-800 hover:from-red-200 hover:to-red-300">
+                {{ skill.name }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

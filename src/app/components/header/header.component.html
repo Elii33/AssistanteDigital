@@ -1,0 +1,105 @@
+<header
+  class="fixed w-full top-0 z-50 transition-all duration-300 backdrop-blur-sm"
+  [ngClass]="isScrolled ? 'bg-white shadow-lg' : 'bg-white/90'"
+>
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16 md:h-20">
+      <!-- Logo avec animation -->
+      <div class="flex-shrink-0 animate-fade-in">
+        <a (click)="scrollToSection('home')" class="text-xl md:text-2xl font-bold text-blue-600 hover:text-blue-700 transition-all duration-300 cursor-pointer hover:scale-105 inline-block">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Mon Entreprise
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Menu avec animations -->
+      <div class="hidden md:flex space-x-8 animate-fade-in-delay">
+        <a
+          (click)="scrollToSection('home')"
+          class="nav-link"
+        >
+          Accueil
+        </a>
+        <a
+          (click)="scrollToSection('services')"
+          class="nav-link"
+        >
+          Services
+        </a>
+        <a
+          (click)="scrollToSection('process')"
+          class="nav-link"
+        >
+          Process
+        </a>
+        <a
+          (click)="scrollToSection('about')"
+          class="nav-link"
+        >
+          À propos
+        </a>
+        <a
+          (click)="scrollToSection('contact')"
+          class="btn-primary !py-2 !px-6 cursor-pointer hover:scale-105 transition-transform"
+        >
+          Contact
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button avec animation -->
+      <div class="md:hidden">
+        <button
+          (click)="toggleMobileMenu()"
+          class="text-gray-700 hover:text-blue-600 focus:outline-none transition-all duration-300 hover:scale-110"
+        >
+          <svg class="h-6 w-6 transition-transform duration-300" [class.rotate-90]="mobileMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path *ngIf="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <path *ngIf="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu avec animation slide -->
+    <div
+      class="md:hidden overflow-hidden transition-all duration-300 ease-in-out"
+      [class.max-h-96]="mobileMenuOpen"
+      [class.max-h-0]="!mobileMenuOpen"
+      [class.pb-4]="mobileMenuOpen"
+    >
+      <div class="space-y-2 pt-2">
+        <a
+          (click)="scrollToSection('home')"
+          class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
+        >
+          Accueil
+        </a>
+        <a
+          (click)="scrollToSection('services')"
+          class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
+        >
+          Services
+        </a>
+        <a
+          (click)="scrollToSection('process')"
+          class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
+        >
+          Process
+        </a>
+        <a
+          (click)="scrollToSection('about')"
+          class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
+        >
+          À propos
+        </a>
+        <a
+          (click)="scrollToSection('contact')"
+          class="block px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 rounded-lg cursor-pointer transition-all duration-300 text-center font-semibold hover:scale-105"
+        >
+          Contact
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

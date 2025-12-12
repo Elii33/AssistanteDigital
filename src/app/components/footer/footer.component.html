@@ -1,0 +1,107 @@
+<footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 relative overflow-hidden">
+  <!-- Effet de fond animé -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 1s"></div>
+  </div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <!-- Colonne 1 -->
+        <div class="transform hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            [Nom de la micro-entreprise]
+          </h3>
+          <p class="text-gray-400 leading-relaxed">
+            Développeur web freelance spécialisé en WordPress et applications Java/Spring Boot/Angular.
+          </p>
+        </div>
+
+        <!-- Colonne 2 -->
+        <div class="transform hover:scale-105 transition-transform duration-300">
+          <h4 class="text-lg font-semibold mb-4 text-blue-400">Navigation</h4>
+          <ul class="space-y-2">
+            <li>
+              <a (click)="scrollToSection('home')"
+                 class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group">
+                <span class="group-hover:mr-2 transition-all">→</span> Accueil
+              </a>
+            </li>
+            <li>
+              <a (click)="scrollToSection('services')"
+                 class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group">
+                <span class="group-hover:mr-2 transition-all">→</span> Services
+              </a>
+            </li>
+            <li>
+              <a (click)="scrollToSection('process')"
+                 class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group">
+                <span class="group-hover:mr-2 transition-all">→</span> Process
+              </a>
+            </li>
+            <li>
+              <a (click)="scrollToSection('about')"
+                 class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group">
+                <span class="group-hover:mr-2 transition-all">→</span> À propos
+              </a>
+            </li>
+            <li>
+              <a (click)="scrollToSection('contact')"
+                 class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group">
+                <span class="group-hover:mr-2 transition-all">→</span> Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Colonne 3 -->
+        <div class="transform hover:scale-105 transition-transform duration-300">
+          <h4 class="text-lg font-semibold mb-4 text-purple-400">Contact</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center hover:text-white transition-colors">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <a href="mailto:ton.email@pro.fr" class="hover:text-white transition-colors">
+                [ton.email&#64;pro.fr]
+              </a>
+            </li>
+            <li class="flex items-center hover:text-white transition-colors">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              <a href="tel:+33xxxxxxxxx" class="hover:text-white transition-colors">
+                [06 xx xx xx xx]
+              </a>
+            </li>
+            <li>
+              <a href="https://www.malt.fr/profile/[votre-profil]"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="inline-flex items-center hover:text-white transition-all duration-300 group">
+                <svg class="w-5 h-5 mr-2 transform group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+                Profil Malt
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-700 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+          <p class="mb-4 md:mb-0 text-center md:text-left">
+            © {{ currentYear }} [Nom de la micro-entreprise] • Micro-entreprise (EI) • TVA non applicable, art. 293 B du CGI
+          </p>
+          <p class="flex items-center">
+            Développé avec
+            <span class="mx-1 text-red-500 animate-pulse-slow text-lg">❤</span>
+            en Angular & TailwindCSS
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

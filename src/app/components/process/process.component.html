@@ -1,0 +1,39 @@
+<section id="process" class="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  <!-- Décorations de fond -->
+  <div class="absolute top-20 left-0 w-64 h-64 bg-purple-200/20 rounded-full filter blur-3xl"></div>
+  <div class="absolute bottom-20 right-0 w-80 h-80 bg-blue-200/20 rounded-full filter blur-3xl"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16 animate-fade-in">
+      <h2 class="section-title">Comment on travaille ensemble ?</h2>
+      <p class="section-subtitle">Un process clair et transparent, étape par étape</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="space-y-8">
+        <div *ngFor="let step of processSteps; let i = index" class="flex gap-6 items-start animate-slide-in-left" [style.animation-delay]="(i * 0.1) + 's'">
+          <!-- Numéro et ligne -->
+          <div class="flex flex-col items-center">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-lg transform hover:scale-110 hover:rotate-12 transition-all duration-300">
+              {{ step.number }}
+            </div>
+            <div *ngIf="i < processSteps.length - 1" class="w-1 h-full bg-gradient-to-b from-blue-400 to-purple-400 mt-2 flex-grow min-h-[60px] rounded-full"></div>
+          </div>
+
+          <!-- Contenu -->
+          <div class="flex-1 pb-8">
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 group">
+              <div class="text-4xl mb-3 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-300 inline-block">
+                {{ step.icon }}
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                {{ step.title }}
+              </h3>
+              <p class="text-gray-600">{{ step.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
