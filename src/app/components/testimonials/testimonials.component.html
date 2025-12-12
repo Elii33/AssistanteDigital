@@ -1,19 +1,20 @@
+<!--
 <section id="testimonials" class="py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50 relative overflow-hidden">
-  <!-- Décorations de fond -->
+  Décorations de fond
   <div class="absolute inset-0 opacity-30">
     <div class="absolute top-20 left-10 w-72 h-72 bg-blue-300/20 rounded-full filter blur-3xl animate-float"></div>
     <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-300/20 rounded-full filter blur-3xl animate-float-delay"></div>
   </div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <!-- Titre de section -->
+    Titre de section
     <div class="text-center mb-16"
          [class.animate-slide-up]="testimonialsVisible"
          [class.opacity-0]="!testimonialsVisible">
       <h2 class="section-title">Avis Clients</h2>
       <p class="section-subtitle">Ce que mes clients disent de mes services</p>
 
-      <!-- Note moyenne avec étoiles -->
+      Note moyenne avec étoiles
       <div class="flex items-center justify-center gap-2 mt-6">
         <div class="flex">
           <svg *ngFor="let star of getStars(5)" class="w-6 h-6 text-yellow-400 fill-current" viewBox="0 0 20 20">
@@ -25,13 +26,13 @@
       </div>
     </div>
 
-    <!-- Carousel d'avis -->
+    Carousel d'avis
     <div class="max-w-4xl mx-auto"
          [class.animate-fade-in-up]="testimonialsVisible"
          [class.opacity-0]="!testimonialsVisible"
          style="animation-delay: 0.2s">
 
-      <!-- Carte d'avis principale -->
+      Carte d'avis principale
       <div class="relative">
         <div *ngFor="let testimonial of testimonials; let i = index"
              [class.block]="i === currentIndex"
@@ -39,7 +40,7 @@
              class="transition-all duration-500">
 
           <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-12 transform hover:scale-105 transition-all duration-300">
-            <!-- Source badge -->
+            Source badge
             <div class="flex items-center justify-between mb-6">
               <div class="flex items-center gap-2">
                 <span class="text-2xl">{{ getSourceIcon(testimonial.source) }}</span>
@@ -48,7 +49,7 @@
               <span class="text-sm text-gray-500">{{ testimonial.date }}</span>
             </div>
 
-            <!-- Étoiles -->
+            Étoiles
             <div class="flex items-center gap-1 mb-4">
               <svg *ngFor="let star of getStars(testimonial.rating)"
                    class="w-5 h-5 text-yellow-400 fill-current animate-scale-pulse"
@@ -58,7 +59,7 @@
               </svg>
             </div>
 
-            <!-- Citation -->
+            Citation
             <div class="mb-6">
               <svg class="w-10 h-10 text-blue-200 mb-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -68,9 +69,9 @@
               </p>
             </div>
 
-            <!-- Informations client -->
+            Informations client
             <div class="flex items-center gap-4 pt-6 border-t border-gray-200">
-              <!-- Avatar avec initiales -->
+              Avatar avec initiales
               <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">
                 {{ testimonial.name.charAt(0) }}{{ testimonial.name.split(' ')[1]?.charAt(0) || '' }}
               </div>
@@ -82,7 +83,7 @@
           </div>
         </div>
 
-        <!-- Boutons de navigation -->
+        Boutons de navigation
         <button
           (click)="previousTestimonial()"
           class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
@@ -102,7 +103,7 @@
         </button>
       </div>
 
-      <!-- Indicateurs de pagination -->
+      Indicateurs de pagination
       <div class="flex justify-center gap-2 mt-8">
         <button
           *ngFor="let testimonial of testimonials; let i = index"
@@ -117,7 +118,7 @@
       </div>
     </div>
 
-    <!-- Call to action -->
+    Call to action
     <div class="text-center mt-12"
          [class.animate-slide-up]="testimonialsVisible"
          [class.opacity-0]="!testimonialsVisible"
@@ -135,7 +136,7 @@
       </button>
     </div>
 
-    <!-- Note pour vous (visible uniquement en dev) -->
+    Note pour vous (visible uniquement en dev)
     <div class="mt-16 max-w-2xl mx-auto bg-yellow-50 border-2 border-yellow-200 rounded-xl p-6 animate-fade-in">
       <div class="flex items-start gap-3">
         <svg class="w-6 h-6 text-yellow-600 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,3 +153,4 @@
     </div>
   </div>
 </section>
+-->
