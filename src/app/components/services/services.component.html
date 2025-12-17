@@ -234,7 +234,7 @@
               1 automatisation simple/mois
             </li>
           </ul>
-          <button class="w-full btn-secondary">Choisir Starter</button>
+          <button class="w-full btn-secondary" (click)="selectPlan('essential')">Choisir Starter</button>
         </div>
 
         <!-- Pack Pro - RECOMMANDÉ -->
@@ -274,7 +274,7 @@
               Dashboard Notion personnalisé
             </li>
           </ul>
-          <button class="w-full bg-white text-gold-700 font-bold py-3 px-6 rounded-lg hover:bg-purple-50 transition-colors duration-300 shadow-lg">
+          <button class="w-full bg-white text-gold-700 font-bold py-3 px-6 rounded-lg hover:bg-purple-50 transition-colors duration-300 shadow-lg" (click)="selectPlan('pro')">
             Choisir Pro
           </button>
         </div>
@@ -315,15 +315,89 @@
               Reporting mensuel détaillé
             </li>
           </ul>
-          <button class="w-full btn-secondary">Choisir Premium</button>
+          <button class="w-full btn-secondary" (click)="selectPlan('premium')">Choisir Premium</button>
         </div>
       </div>
 
       <p class="text-center text-sm text-gray-500 mt-8">
         💡 Tous les forfaits sont sans engagement • Paiement mensuel • Annulation à tout moment
       </p>
+
+      <!-- Lien pour gérer son abonnement -->
+      <div class="text-center mt-6">
+        <button
+          (click)="openPortalModal()"
+          class="text-gold-600 hover:text-gold-700 underline text-sm font-medium transition-colors">
+          Déjà abonné(e) ? Gérer mon abonnement
+        </button>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- Modal Portail Client -->
+<div *ngIf="showPortalModal"
+     class="fixed inset-0 z-50 flex items-center justify-center p-4"
+     (click)="closePortalModal()">
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+  <!-- Modal Content -->
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8"
+       (click)="$event.stopPropagation()">
+    <!-- Close button -->
+    <button
+      (click)="closePortalModal()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="text-4xl mb-3">⚙️</div>
+      <h3 class="text-2xl font-bold text-gray-900">Gérer mon abonnement</h3>
+      <p class="text-gray-600 mt-2">
+        Accédez à votre espace client pour modifier ou annuler votre abonnement.
+      </p>
+    </div>
+
+    <!-- Form -->
+    <div class="space-y-4">
+      <div>
+        <label for="portal-email" class="block text-sm font-medium text-gray-700 mb-2">
+          Votre adresse email
+        </label>
+        <input
+          type="email"
+          id="portal-email"
+          [(ngModel)]="portalEmail"
+          placeholder="email@exemple.com"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
+          (keyup.enter)="accessCustomerPortal()"
+          [disabled]="isLoadingPortal">
+      </div>
+
+      <button
+        (click)="accessCustomerPortal()"
+        [disabled]="!portalEmail.trim() || isLoadingPortal"
+        class="w-full bg-gradient-to-r from-gold-600 to-beige-800 text-white font-bold py-3 px-6 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+        <span *ngIf="!isLoadingPortal">Accéder à mon espace</span>
+        <span *ngIf="isLoadingPortal" class="flex items-center justify-center">
+          <svg class="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          Chargement...
+        </span>
+      </button>
+    </div>
+
+    <p class="text-xs text-gray-500 text-center mt-4">
+      Utilisez l'email associé à votre abonnement Stripe
+    </p>
+  </div>
+</div>
 
 

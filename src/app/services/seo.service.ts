@@ -70,22 +70,22 @@ export class SeoService {
       const localBusinessSchema = {
         '@context': 'https://schema.org',
         '@type': 'ProfessionalService',
-        'name': 'Arnaud Derisbourg - Développeur Web Freelance',
-        'description': 'Développeur web freelance spécialisé en WordPress, Java, Spring Boot et Angular. Création de sites vitrines et applications web sur mesure pour TPE/PME.',
+        'name': 'Assistante Virtuelle & Digitale - Automatisation & Productivité',
+        'description': 'Assistante virtuelle et digitale spécialisée en automatisation avec Notion, Make, Zapier et Canva. Optimisation de votre gestion administrative et workflows pour TPE/PME.',
         'url': 'https://votresite.com',
         'telephone': '+33-X-XX-XX-XX-XX',
-        'email': 'derisbourgarnaud@gmail.com',
+        'email': 'contact@votresite.com',
         'address': {
           '@type': 'PostalAddress',
           'addressCountry': 'FR'
         },
         'priceRange': '€€',
         'areaServed': 'France',
-        'serviceType': ['Développement WordPress', 'Développement Java', 'Développement Angular', 'Création site vitrine', 'Application web sur mesure'],
+        'serviceType': ['Automatisation Notion', 'Automatisation Make', 'Gestion administrative', 'Gestion réseaux sociaux', 'Organisation digitale'],
         'aggregateRating': {
           '@type': 'AggregateRating',
           'ratingValue': '5',
-          'reviewCount': '3'
+          'reviewCount': '4'
         }
       };
 
@@ -93,24 +93,24 @@ export class SeoService {
       const personSchema = {
         '@context': 'https://schema.org',
         '@type': 'Person',
-        'name': 'Arnaud Derisbourg',
-        'jobTitle': 'Développeur Web Freelance',
-        'description': 'Développeur web freelance expert en WordPress, Java, Spring Boot et Angular 17+',
-        'email': 'derisbourgarnaud@gmail.com',
+        'name': 'Assistante Digitale Pro',
+        'jobTitle': 'Assistante Virtuelle & Digitale',
+        'description': 'Assistante virtuelle et digitale experte en automatisation Notion, Make, Zapier et création visuelle Canva',
+        'email': 'contact@votresite.com',
         'url': 'https://votresite.com',
         'sameAs': [
           'https://www.malt.fr/profile/votreprofil',
           'https://www.linkedin.com/in/votreprofil'
         ],
         'knowsAbout': [
-          'Développement WordPress',
-          'Java',
-          'Spring Boot',
-          'Angular',
-          'Développement Web',
-          'Application Web',
-          'Site Vitrine',
-          'E-commerce'
+          'Automatisation Notion',
+          'Make (Integromat)',
+          'Zapier',
+          'Canva',
+          'Gestion administrative',
+          'Réseaux sociaux',
+          'Organisation digitale',
+          'Workflow automation'
         ]
       };
 
@@ -118,30 +118,38 @@ export class SeoService {
       const serviceSchema = {
         '@context': 'https://schema.org',
         '@type': 'Service',
-        'serviceType': 'Développement Web',
+        'serviceType': 'Assistante Virtuelle & Digitale',
         'provider': {
           '@type': 'Person',
-          'name': 'Arnaud Derisbourg'
+          'name': 'Assistante Digitale Pro'
         },
         'areaServed': 'France',
         'hasOfferCatalog': {
           '@type': 'OfferCatalog',
-          'name': 'Services de développement web',
+          'name': 'Services d\'assistance virtuelle et digitale',
           'itemListElement': [
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Site WordPress Administrable',
-                'description': 'Création de site vitrine WordPress avec blocs personnalisés ACF Pro'
+                'name': 'Automatisation & Productivité',
+                'description': 'Configuration Notion, automatisations Make/Zapier, optimisation workflows'
               }
             },
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Application Java Angular',
-                'description': 'Développement d\'application web avec backend Java Spring Boot et frontend Angular'
+                'name': 'Gestion Administrative & Réseaux Sociaux',
+                'description': 'Gestion administrative complète, création visuelle Canva, planification réseaux sociaux'
+              }
+            },
+            {
+              '@type': 'Offer',
+              'itemOffered': {
+                '@type': 'Service',
+                'name': 'Accompagnement Personnalisé',
+                'description': 'Formation outils digitaux, support continu et optimisations régulières'
               }
             }
           ]

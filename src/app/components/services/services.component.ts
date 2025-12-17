@@ -1,16 +1,25 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { StripeService } from '../../services/stripe.service';
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
 export class ServicesComponent implements OnInit {
   servicesVisible = false;
   cardTransforms: string[] = ['', '', ''];
+
+  // Gestion du portail client
+  showPortalModal = false;
+  portalEmail = '';
+  isLoadingPortal = false;
+
+  constructor(private stripeService: StripeService) {}
 
   ngOnInit() {
     this.checkVisibility();
@@ -47,5 +56,31 @@ export class ServicesComponent implements OnInit {
 
   onCardMouseLeave(cardIndex: number) {
     this.cardTransforms[cardIndex] = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+  }
+
+  // Méthodes de paiement Stripe
+  selectPlan(planId: string) {
+    this.stripeService.redirectToCheckout(planId);
+  }
+
+  // Méthodes pour le portail client
+  openPortalModal() {
+    this.showPortalModal = true;
+    this.portalEmail = '';
+  }
+
+  closePortalModal() {
+    this.showPortalModal = false;
+    this.portalEmail = '';
+  }
+
+  async accessCustomerPortal() {
+    if (!this.portalEmail.trim()) {
+      return;
+    }
+
+    this.isLoadingPortal = true;
+    await this.stripeService.openCustomerPortal(this.portalEmail);
+    this.isLoadingPortal = false;
   }
 }

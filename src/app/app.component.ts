@@ -33,12 +33,12 @@ export class AppComponent implements OnInit {
   constructor(private seoService: SeoService) {}
 
   ngOnInit() {
-    // Configuration SEO optimisée avec mots-clés TFIDF
+    // Configuration SEO optimisée pour assistante virtuelle & digitale
     this.seoService.updateMetaTags({
-      title: 'Développeur Web Freelance WordPress & Java Angular | Arnaud Derisbourg',
-      description: 'Développeur web freelance expert WordPress, Java, Spring Boot et Angular 17+. Création de sites vitrines administrables et applications web sur mesure pour TPE/PME en France. Devis gratuit.',
-      keywords: 'développeur web freelance, développeur wordpress, développeur java, développeur angular, spring boot, site vitrine, application web, développement web sur mesure, freelance informatique, création site internet, TPE PME, développeur full stack, react, typescript, paris, france',
-      author: 'Arnaud Derisbourg',
+      title: 'Assistante Virtuelle & Digitale | Automatisation Notion Make Canva',
+      description: 'Assistante virtuelle & digitale spécialisée en automatisation avec Notion, Make, Zapier et Canva. Optimisez votre gestion administrative, réseaux sociaux et workflows. Gagnez du temps pour votre business.',
+      keywords: 'assistante virtuelle, assistante digitale, automatisation, notion, make, zapier, canva, gestion administrative, réseaux sociaux, automation, workflow, productivité, freelance, gestion tâches, organisation digitale',
+      author: 'Assistante Digitale Pro',
       type: 'website',
       url: 'https://votresite.com',
       image: 'https://votresite.com/assets/og-image.jpg'
