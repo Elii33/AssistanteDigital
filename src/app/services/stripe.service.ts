@@ -17,7 +17,7 @@ export class StripeService {
 
   // IMPORTANT: Remplacez par votre clé publique Stripe
   // Vous la trouverez dans : https://dashboard.stripe.com/test/apikeys
-  private readonly stripePublicKey = 'pk_test_51SawCGPrLh42XvioglaiRciq63gnu1Ms8X7x3vqMJ3XidLDQQJObby5VIeWU5stiOjlqqemABj470LWB6BlvOr3R00tiNzLNcI';
+  private readonly stripePublicKey = 'pk_test_51SfLq4K0M4NmGmuGldL3m0KAVZPUwnkLOWZ4BCtEDBIJrJppu3VcmvpNkDnUM9JXBLigeg5tJq9k3opAm6dgZUUK00QyRhJ6Kg';
 
   constructor() {
     this.initializeStripe();
@@ -152,6 +152,60 @@ export class StripeService {
     */
 
     console.log('Backend non configuré. Utilisez redirectToCheckout() pour les tests.');
+  }
+
+  // Paiement horaire - permet de payer un nombre d'heures spécifique pour un service
+  async redirectToHourlyCheckout(
+    serviceId: string,
+    serviceName: string,
+    hourlyRate: number,
+    hours: number
+  ): Promise<void> {
+    if (!this.stripe) {
+      console.error('Stripe n\'est pas initialisé');
+      alert('Erreur d\'initialisation du paiement. Veuillez réessayer.');
+      return;
+    }
+
+    try {
+      // Attendre que Stripe soit initialisé si nécessaire
+      if (!this.stripe) {
+        await this.initializeStripe();
+      }
+
+      if (!this.stripe) {
+        throw new Error('Impossible d\'initialiser Stripe');
+      }
+
+      // Appel au backend pour créer une session de paiement horaire
+      const response = await fetch('http://localhost:3000/api/create-hourly-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          serviceId,
+          serviceName,
+          hourlyRate,
+          hours
+        })
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Erreur lors de la création de la session');
+      }
+
+      const session = await response.json();
+
+      // Redirection vers Stripe Checkout
+      if (session.url) {
+        window.location.href = session.url;
+      } else {
+        throw new Error('URL de session manquante');
+      }
+    } catch (error) {
+      console.error('Erreur lors de la redirection vers Stripe:', error);
+      alert(`Erreur: ${error instanceof Error ? error.message : 'Une erreur est survenue'}.\n\nAssurez-vous que le serveur backend est démarré (npm start dans le dossier backend).`);
+    }
   }
 
   // Ouvrir le portail client Stripe pour gérer l'abonnement

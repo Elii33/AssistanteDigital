@@ -8,7 +8,12 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["stripe", "payment", "express", "backend"],
+  "keywords": [
+    "stripe",
+    "payment",
+    "express",
+    "backend"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
@@ -17,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "nodemailer": "^7.0.11",
     "stripe": "^20.0.0"
   }
 }

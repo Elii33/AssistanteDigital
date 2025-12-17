@@ -8,6 +8,7 @@ import { AboutComponent } from './components/about/about.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BookingComponent } from './components/booking/booking.component';
 import { SeoService } from './services/seo.service';
 
 @Component({
@@ -21,6 +22,7 @@ import { SeoService } from './services/seo.service';
     ProcessComponent,
     AboutComponent,
     TestimonialsComponent,
+    BookingComponent,
     ContactComponent,
     FooterComponent
   ],

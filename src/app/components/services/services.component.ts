@@ -3,6 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StripeService } from '../../services/stripe.service';
 
+interface ServiceHourly {
+  id: string;
+  name: string;
+  hourlyRate: number;
+  minHours: number;
+  maxHours: number;
+  selectedHours: number;
+}
+
 @Component({
   selector: 'app-services',
   standalone: true,
@@ -18,6 +27,37 @@ export class ServicesComponent implements OnInit {
   showPortalModal = false;
   portalEmail = '';
   isLoadingPortal = false;
+
+  // Services avec tarif horaire
+  hourlyServices: ServiceHourly[] = [
+    {
+      id: 'admin',
+      name: 'Gestion Administrative',
+      hourlyRate: 25,
+      minHours: 1,
+      maxHours: 40,
+      selectedHours: 2
+    },
+    {
+      id: 'automation',
+      name: 'Automatisation & Design',
+      hourlyRate: 35,
+      minHours: 1,
+      maxHours: 40,
+      selectedHours: 2
+    },
+    {
+      id: 'social',
+      name: 'Gestion Réseaux Sociaux',
+      hourlyRate: 30,
+      minHours: 1,
+      maxHours: 40,
+      selectedHours: 2
+    }
+  ];
+
+  // Loading states pour les boutons de paiement horaire
+  isLoadingHourly: { [key: string]: boolean } = {};
 
   constructor(private stripeService: StripeService) {}
 
@@ -61,6 +101,48 @@ export class ServicesComponent implements OnInit {
   // Méthodes de paiement Stripe
   selectPlan(planId: string) {
     this.stripeService.redirectToCheckout(planId);
+  }
+
+  // Méthodes pour le sélecteur d'heures
+  getService(index: number): ServiceHourly {
+    return this.hourlyServices[index];
+  }
+
+  calculateTotal(index: number): number {
+    const service = this.hourlyServices[index];
+    return service.hourlyRate * service.selectedHours;
+  }
+
+  incrementHours(index: number): void {
+    const service = this.hourlyServices[index];
+    if (service.selectedHours < service.maxHours) {
+      service.selectedHours++;
+    }
+  }
+
+  decrementHours(index: number): void {
+    const service = this.hourlyServices[index];
+    if (service.selectedHours > service.minHours) {
+      service.selectedHours--;
+    }
+  }
+
+  async payHourly(index: number): Promise<void> {
+    const service = this.hourlyServices[index];
+    this.isLoadingHourly[service.id] = true;
+
+    try {
+      await this.stripeService.redirectToHourlyCheckout(
+        service.id,
+        service.name,
+        service.hourlyRate,
+        service.selectedHours
+      );
+    } catch (error) {
+      console.error('Erreur lors du paiement:', error);
+    } finally {
+      this.isLoadingHourly[service.id] = false;
+    }
   }
 
   // Méthodes pour le portail client
