@@ -1,3 +1,20 @@
+/**
+ * ============================================================================
+ * Elilouche Assistante Digitale - Landing Page
+ * ============================================================================
+ *
+ * @copyright 2025 nonodevco - Tous droits réservés
+ * @author    nonodevco (https://nonodevco.com)
+ * @license   Propriétaire - Reproduction et distribution interdites
+ *
+ * Ce code source est la propriété exclusive de nonodevco.
+ * Toute reproduction, modification, distribution ou utilisation
+ * non autorisée de ce code est strictement interdite.
+ *
+ * Développé avec Angular 18+ et Tailwind CSS
+ * ============================================================================
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
@@ -9,7 +26,10 @@ import { TestimonialsComponent } from './components/testimonials/testimonials.co
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BookingComponent } from './components/booking/booking.component';
+import { AboutMeComponent } from './components/about-me/about-me.component';
+import { AboutStoryComponent } from './components/about-story/about-story.component';
 import { SeoService } from './services/seo.service';
+import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
 
 @Component({
   selector: 'app-root',
@@ -18,14 +38,17 @@ import { SeoService } from './services/seo.service';
     CommonModule,
     HeaderComponent,
     HeroComponent,
+    AboutMeComponent,
+    AboutStoryComponent,
     ServicesComponent,
     ProcessComponent,
     AboutComponent,
     TestimonialsComponent,
     BookingComponent,
     ContactComponent,
-    FooterComponent
-  ],
+    FooterComponent,
+    WhoAmIComponent
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -35,7 +58,6 @@ export class AppComponent implements OnInit {
   constructor(private seoService: SeoService) {}
 
   ngOnInit() {
-    // Configuration SEO optimisée pour assistante virtuelle & digitale
     this.seoService.updateMetaTags({
       title: 'Assistante Virtuelle & Digitale | Automatisation Notion Make Canva',
       description: 'Assistante virtuelle & digitale spécialisée en automatisation avec Notion, Make, Zapier et Canva. Optimisez votre gestion administrative, réseaux sociaux et workflows. Gagnez du temps pour votre business.',
@@ -46,7 +68,6 @@ export class AppComponent implements OnInit {
       image: 'https://votresite.com/assets/og-image.jpg'
     });
 
-    // Ajouter les données structurées Schema.org
     this.seoService.createStructuredData();
   }
 }

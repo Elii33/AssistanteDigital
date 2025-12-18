@@ -187,27 +187,57 @@ export class BookingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // ===== CALENDLY =====
   private loadCalendlyScript(): void {
+    // Vérifier si le CSS est déjà chargé
+    if (!document.querySelector('link[href*="calendly.com"]')) {
+      const link = document.createElement('link');
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+
+    // Si Calendly est déjà chargé, initialiser directement
     if (window.Calendly) {
-      this.isLoading = false;
+      this.initCalendlyWidget();
       return;
     }
 
+    // Vérifier si le script est déjà en cours de chargement
+    const existingScript = document.querySelector('script[src*="calendly.com"]');
+    if (existingScript) {
+      // Attendre que le script existant se charge
+      existingScript.addEventListener('load', () => this.initCalendlyWidget());
+      return;
+    }
+
+    // Charger le script
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     script.onload = () => {
-      this.isLoading = false;
+      this.initCalendlyWidget();
     };
     script.onerror = () => {
       console.error('Erreur lors du chargement de Calendly');
       this.isLoading = false;
     };
     document.head.appendChild(script);
+  }
 
-    const link = document.createElement('link');
-    link.href = 'https://assets.calendly.com/assets/external/widget.css';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
+  private initCalendlyWidget(): void {
+    this.isLoading = false;
+
+    // Attendre que l'élément soit dans le DOM
+    setTimeout(() => {
+      const widgetElement = document.querySelector('.calendly-inline-widget');
+      if (widgetElement && window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: this.calendlyUrl + '?hide_gdpr_banner=1&background_color=fefdfb&text_color=1c1917&primary_color=ca8a04',
+          parentElement: widgetElement,
+          prefill: {},
+          utm: {}
+        });
+      }
+    }, 100);
   }
 
   openCalendlyPopup(): void {

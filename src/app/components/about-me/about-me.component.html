@@ -1,0 +1,114 @@
+<section id="about-me" class="py-20 bg-gradient-to-br from-beige-100 via-beige-50 to-beige-100 overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Titre de section -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-beige-900 mb-4">
+          <span class="bg-gradient-to-r from-gold-500 via-gold-600 to-beige-700 bg-clip-text text-transparent">
+            Elisa
+          </span>
+          - Ton bras droit digital
+        </h2>
+      </div>
+
+      <!-- Section Photo + Texte -->
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+
+        <!-- Photo avec Bienvenue tournant -->
+        <div class="relative group photo-container">
+          <!-- Texte "Bienvenue !" qui tourne autour du cadre -->
+          <div class="rotating-text-container">
+            <svg viewBox="0 0 400 400" class="rotating-svg">
+              <defs>
+                <path id="circlePath" d="M200,200 m-160,0 a160,160 0 1,1 320,0 a160,160 0 1,1 -320,0"/>
+              </defs>
+              <text class="rotating-text">
+                <textPath href="#circlePath" startOffset="0%">
+                  Bienvenue ! &#x2728; Bienvenue ! &#x2728; Bienvenue ! &#x2728; Bienvenue ! &#x2728;
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="relative overflow-hidden rounded-2xl shadow-2xl transform transition-all duration-500 group-hover:scale-[1.02] photo-frame">
+            <!-- Image -->
+            <img
+              src="assets/images/69207502c8c7a_Moi.png"
+              alt="Elisa - Assistante Digitale"
+              class="w-full h-auto object-cover aspect-[3/4]"
+              loading="lazy"
+            />
+            <!-- Overlay au hover -->
+            <div class="absolute inset-0 bg-gradient-to-t from-gold-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+            <!-- Effet flash -->
+            <div class="flash-effect"></div>
+          </div>
+
+          <!-- Décoration -->
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl -z-10 opacity-60"></div>
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-beige-300 to-beige-400 rounded-2xl -z-10 opacity-60"></div>
+        </div>
+
+        <!-- Texte -->
+        <div class="text-block bg-white rounded-2xl shadow-xl p-8 lg:p-10 transform transition-all duration-500 hover:shadow-2xl">
+          <!-- Accroche -->
+          <p class="text-accroche">
+            Assistante digitale & cerveau droit pour entrepreneurs fatigués du digital
+          </p>
+
+          <!-- Titre principal -->
+          <h3 class="text-titre">
+            Je t'aide à structurer ton business en ligne
+          </h3>
+          <p class="text-sous-titre">
+            (même si t'as déjà 100 onglets ouverts)
+          </p>
+
+          <!-- Description -->
+          <p class="text-description">
+            Tu es entrepreneur, freelance, ou créateur de contenu et tu te sens débordé par toutes les tâches administratives et techniques ?
+            Je suis là pour t'aider à automatiser, organiser et optimiser ton quotidien professionnel.
+          </p>
+
+          <!-- Liste des points forts -->
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-liste-item">Organisation Notion sur-mesure</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-liste-item">Automatisations Make pour gagner du temps</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-gold-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span class="text-liste-item">Visuels Canva professionnels</span>
+            </li>
+          </ul>
+
+          <!-- CTA -->
+          <div class="mt-6">
+            <button
+              (click)="scrollToSection('booking')"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-gold-600 hover:to-gold-700 transition-all duration-300 transform hover:scale-105"
+            >
+              Prendre rendez-vous
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

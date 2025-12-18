@@ -1,14 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StripeService } from '../../services/stripe.service';
+import { StripeService, HourlyService } from '../../services/stripe.service';
 
-interface ServiceHourly {
-  id: string;
-  name: string;
-  hourlyRate: number;
-  minHours: number;
-  maxHours: number;
+interface ServiceHourlyDisplay extends HourlyService {
   selectedHours: number;
 }
 
@@ -28,41 +23,40 @@ export class ServicesComponent implements OnInit {
   portalEmail = '';
   isLoadingPortal = false;
 
-  // Services avec tarif horaire
-  hourlyServices: ServiceHourly[] = [
-    {
-      id: 'admin',
-      name: 'Gestion Administrative',
-      hourlyRate: 25,
-      minHours: 1,
-      maxHours: 40,
-      selectedHours: 2
-    },
-    {
-      id: 'automation',
-      name: 'Automatisation & Design',
-      hourlyRate: 35,
-      minHours: 1,
-      maxHours: 40,
-      selectedHours: 2
-    },
-    {
-      id: 'social',
-      name: 'Gestion Réseaux Sociaux',
-      hourlyRate: 30,
-      minHours: 1,
-      maxHours: 40,
-      selectedHours: 2
-    }
-  ];
+  // Services avec tarif horaire (chargés depuis Stripe)
+  hourlyServices: ServiceHourlyDisplay[] = [];
+  isLoadingServices = true;
 
   // Loading states pour les boutons de paiement horaire
   isLoadingHourly: { [key: string]: boolean } = {};
 
   constructor(private stripeService: StripeService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.checkVisibility();
+    await this.loadHourlyServices();
+  }
+
+  // Charger les services horaires depuis Stripe
+  private async loadHourlyServices() {
+    this.isLoadingServices = true;
+    try {
+      const services = await this.stripeService.getHourlyServices();
+      this.hourlyServices = services.map(service => ({
+        ...service,
+        selectedHours: 2 // Valeur par défaut
+      }));
+    } catch (error) {
+      console.error('Erreur lors du chargement des services:', error);
+      // Fallback avec des valeurs par défaut si le backend n'est pas disponible
+      this.hourlyServices = [
+        { id: 'admin', name: 'Gestion Administrative', hourlyRate: null, minHours: 1, maxHours: 40, configured: false, selectedHours: 2 },
+        { id: 'automation', name: 'Automatisation & Design', hourlyRate: null, minHours: 1, maxHours: 40, configured: false, selectedHours: 2 },
+        { id: 'social', name: 'Gestion Réseaux Sociaux', hourlyRate: null, minHours: 1, maxHours: 40, configured: false, selectedHours: 2 }
+      ];
+    } finally {
+      this.isLoadingServices = false;
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -104,38 +98,51 @@ export class ServicesComponent implements OnInit {
   }
 
   // Méthodes pour le sélecteur d'heures
-  getService(index: number): ServiceHourly {
-    return this.hourlyServices[index];
+  getService(index: number): ServiceHourlyDisplay {
+    return this.hourlyServices[index] || {
+      id: '',
+      name: '',
+      hourlyRate: null,
+      minHours: 1,
+      maxHours: 40,
+      configured: false,
+      selectedHours: 2
+    };
   }
 
   calculateTotal(index: number): number {
     const service = this.hourlyServices[index];
+    if (!service || !service.hourlyRate) return 0;
     return service.hourlyRate * service.selectedHours;
   }
 
   incrementHours(index: number): void {
     const service = this.hourlyServices[index];
-    if (service.selectedHours < service.maxHours) {
+    if (service && service.selectedHours < service.maxHours) {
       service.selectedHours++;
     }
   }
 
   decrementHours(index: number): void {
     const service = this.hourlyServices[index];
-    if (service.selectedHours > service.minHours) {
+    if (service && service.selectedHours > service.minHours) {
       service.selectedHours--;
     }
   }
 
   async payHourly(index: number): Promise<void> {
     const service = this.hourlyServices[index];
+
+    if (!service.configured || !service.hourlyRate) {
+      alert('Ce service n\'est pas encore configuré. Veuillez contacter l\'administrateur.');
+      return;
+    }
+
     this.isLoadingHourly[service.id] = true;
 
     try {
       await this.stripeService.redirectToHourlyCheckout(
         service.id,
-        service.name,
-        service.hourlyRate,
         service.selectedHours
       );
     } catch (error) {
