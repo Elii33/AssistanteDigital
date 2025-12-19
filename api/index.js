@@ -13,8 +13,8 @@ const stripe = require('stripe')(
 );
 
 // Import des services
-const { sendEmail, notifyAdmin, emailTemplates } = require('../backend/services/emailService');
-const { generateInvoicePDF, generateInvoiceNumber } = require('../backend/services/invoiceService');
+const { sendEmail, notifyAdmin, emailTemplates } = require('./services/emailService');
+const { generateInvoicePDF, generateInvoiceNumber } = require('./services/invoiceService');
 
 const app = express();
 

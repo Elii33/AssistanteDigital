@@ -10,7 +10,7 @@ const stripe = require('stripe')(
     : process.env.STRIPE_SECRET_KEY_TEST
 );
 
-const { sendEmail, notifyAdmin, emailTemplates } = require('../backend/services/emailService');
+const { sendEmail, notifyAdmin, emailTemplates } = require('./services/emailService');
 
 // Désactiver le body parser par défaut de Vercel pour ce endpoint
 export const config = {
