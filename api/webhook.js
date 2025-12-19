@@ -12,13 +12,6 @@ const stripe = require('stripe')(
 
 const { sendEmail, notifyAdmin, emailTemplates } = require('./services/emailService');
 
-// Désactiver le body parser par défaut de Vercel pour ce endpoint
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 // Helper pour lire le raw body
 async function getRawBody(req) {
   const chunks = [];

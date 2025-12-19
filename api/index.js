@@ -418,4 +418,8 @@ app.get('/api/invoice/:sessionId', async (req, res) => {
   }
 });
 
+// Export pour Vercel Serverless
 module.exports = app;
+
+// Handler pour Vercel
+module.exports.default = app;
