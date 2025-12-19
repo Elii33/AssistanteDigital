@@ -1,0 +1,149 @@
+/* ===== TITRES ===== */
+
+.recognition-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.recognition-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+/* ===== LISTE DES SITUATIONS ===== */
+
+.recognition-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.recognition-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #ca8a04;
+  transition: all 0.3s ease;
+}
+
+.recognition-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 25px rgba(202, 138, 4, 0.15);
+}
+
+.recognition-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 0.75rem;
+  color: #ca8a04;
+}
+
+.recognition-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.recognition-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* ===== BOUTON CTA ===== */
+
+.recognition-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3rem;
+  background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
+  border: none;
+  border-radius: 9999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(202, 138, 4, 0.3);
+}
+
+.recognition-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(202, 138, 4, 0.4);
+  background: linear-gradient(135deg, #d69e0a 0%, #b8720a 100%);
+}
+
+.recognition-btn:active {
+  transform: translateY(-1px) scale(1);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (min-width: 768px) {
+  .recognition-title {
+    font-size: 2.25rem;
+  }
+
+  .recognition-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .recognition-item {
+    padding: 1.5rem 2rem;
+  }
+
+  .recognition-text {
+    font-size: 1.0625rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .recognition-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .recognition-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 1rem;
+  }
+
+  .recognition-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .recognition-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .recognition-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+}

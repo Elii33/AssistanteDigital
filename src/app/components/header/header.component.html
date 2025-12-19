@@ -6,10 +6,8 @@
     <div class="flex justify-between items-center h-16 md:h-20">
       <!-- Logo avec animation -->
       <div class="flex-shrink-0 animate-fade-in">
-        <a (click)="scrollToSection('home')" class="text-xl md:text-2xl font-bold text-gold-600 hover:text-gold-700 transition-all duration-300 cursor-pointer hover:scale-105 inline-block">
-          <span class="bg-gradient-to-r from-gold-500 via-gold-600 to-beige-700 bg-clip-text text-transparent">
-            ✨Elilouche Assistante Digitale 
-          </span>
+        <a (click)="scrollToSection('home')" class="cursor-pointer hover:scale-105 inline-block transition-all duration-300">
+          <img src="assets/images/ElisAssist.png" alt="ElisAssist - Ton Bras Droit" class="h-32 md:h-40 w-auto" />
         </a>
       </div>
 
@@ -20,6 +18,12 @@
           class="nav-link"
         >
           Accueil
+        </a>
+        <a
+          (click)="scrollToSection('home')"
+          class="nav-link"
+        >
+          Qui suis-je
         </a>
         <a
           (click)="scrollToSection('services')"
@@ -80,6 +84,12 @@
           class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gold-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
         >
           Accueil
+        </a>
+        <a
+          (click)="scrollToSection('home')"
+          class="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-gold-600 rounded-lg cursor-pointer transition-all duration-300 hover:translate-x-2"
+        >
+          Qui suis-je
         </a>
         <a
           (click)="scrollToSection('services')"

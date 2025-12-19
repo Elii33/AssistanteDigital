@@ -30,6 +30,7 @@ import { AboutMeComponent } from './components/about-me/about-me.component';
 import { AboutStoryComponent } from './components/about-story/about-story.component';
 import { SeoService } from './services/seo.service';
 import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
+import { RecognitionComponent } from "./components/recognition/recognition.component";
 
 @Component({
   selector: 'app-root',
@@ -47,7 +48,8 @@ import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
     BookingComponent,
     ContactComponent,
     FooterComponent,
-    WhoAmIComponent
+    WhoAmIComponent,
+    RecognitionComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
