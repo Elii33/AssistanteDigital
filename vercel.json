@@ -3,13 +3,7 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist/mon-entreprise-landing/browser",
-  "framework": null,
   "installCommand": "npm install",
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@3"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/webhook",
