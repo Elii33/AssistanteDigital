@@ -20,6 +20,7 @@ export class SeoService {
     type?: string;
     url?: string;
     image?: string;
+    
   }) {
     // Title
     if (config.title) {

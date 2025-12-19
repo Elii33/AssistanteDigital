@@ -18,7 +18,7 @@ export class EmailService {
   async sendEmail(formData: any): Promise<any> {
     try {
       const templateParams = {
-        from_name: formData.name,
+        from_name: formData.name, 
         from_email: formData.email,
         project_type: formData.projectType,
         message: formData.message,
