@@ -23,17 +23,42 @@ export interface HourlyService {
 })
 export class StripeService {
   private stripe: any = null;
+  private stripeInitPromise: Promise<void> | null = null;
 
-  // IMPORTANT: Remplacez par votre clé publique Stripe
-  // Vous la trouverez dans : https://dashboard.stripe.com/test/apikeys
-  private readonly stripePublicKey = 'pk_test_51SfLq4K0M4NmGmuGldL3m0KAVZPUwnkLOWZ4BCtEDBIJrJppu3VcmvpNkDnUM9JXBLigeg5tJq9k3opAm6dgZUUK00QyRhJ6Kg';
+  // URL de l'API backend
+  // En production sur Vercel, l'API est sur le même domaine (/api/...)
+  // En local, utiliser http://localhost:3000
+  private readonly apiUrl = this.isProduction() ? '' : 'http://localhost:3000';
 
-  constructor() {
-    this.initializeStripe();
+  private isProduction(): boolean {
+    return window.location.hostname === 'elisassist.com' || window.location.hostname.includes('vercel.app');
   }
 
-  private async initializeStripe() {
-    this.stripe = await loadStripe(this.stripePublicKey);
+  constructor() {
+    this.stripeInitPromise = this.initializeStripe();
+  }
+
+  private async initializeStripe(): Promise<void> {
+    try {
+      // Récupérer la clé publique depuis l'API
+      const response = await fetch(`${this.apiUrl}/api/stripe-config`);
+      if (!response.ok) {
+        throw new Error('Impossible de récupérer la configuration Stripe');
+      }
+      const config = await response.json();
+      this.stripe = await loadStripe(config.publishableKey);
+      console.log(`Stripe initialisé en mode: ${config.mode}`);
+    } catch (error) {
+      console.error('Erreur initialisation Stripe:', error);
+      // Fallback sur la clé de test en cas d'erreur
+      this.stripe = await loadStripe('pk_test_51SfLq4K0M4NmGmuGldL3m0KAVZPUwnkLOWZ4BCtEDBIJrJppu3VcmvpNkDnUM9JXBLigeg5tJq9k3opAm6dgZUUK00QyRhJ6Kg');
+    }
+  }
+
+  private async ensureStripeInitialized(): Promise<void> {
+    if (this.stripeInitPromise) {
+      await this.stripeInitPromise;
+    }
   }
 
   // Plans avec leurs prix Stripe
@@ -76,7 +101,7 @@ export class StripeService {
   // Récupérer les services horaires avec leurs prix depuis Stripe
   async getHourlyServices(): Promise<HourlyService[]> {
     try {
-      const response = await fetch('http://localhost:3000/api/hourly-services');
+      const response = await fetch(`${this.apiUrl}/api/hourly-services`);
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des services');
       }
@@ -97,25 +122,16 @@ export class StripeService {
       return;
     }
 
-    if (!this.stripe) {
-      console.error('Stripe n\'est pas initialisé');
-      alert('Erreur d\'initialisation du paiement. Veuillez réessayer.');
-      return;
-    }
-
     try {
-      // Attendre que Stripe soit initialisé si nécessaire
-      if (!this.stripe) {
-        await this.initializeStripe();
-      }
+      // Attendre que Stripe soit initialisé
+      await this.ensureStripeInitialized();
 
-      // Vérification finale
       if (!this.stripe) {
         throw new Error('Impossible d\'initialiser Stripe');
       }
 
       // Appel au backend pour créer une session Stripe
-      const response = await fetch('http://localhost:3000/api/create-checkout-session', {
+      const response = await fetch(`${this.apiUrl}/api/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -184,24 +200,16 @@ export class StripeService {
     serviceId: string,
     hours: number
   ): Promise<void> {
-    if (!this.stripe) {
-      console.error('Stripe n\'est pas initialisé');
-      alert('Erreur d\'initialisation du paiement. Veuillez réessayer.');
-      return;
-    }
-
     try {
-      // Attendre que Stripe soit initialisé si nécessaire
-      if (!this.stripe) {
-        await this.initializeStripe();
-      }
+      // Attendre que Stripe soit initialisé
+      await this.ensureStripeInitialized();
 
       if (!this.stripe) {
         throw new Error('Impossible d\'initialiser Stripe');
       }
 
       // Appel au backend pour créer une session de paiement horaire
-      const response = await fetch('http://localhost:3000/api/create-hourly-checkout-session', {
+      const response = await fetch(`${this.apiUrl}/api/create-hourly-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -237,7 +245,7 @@ export class StripeService {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/create-customer-portal-session', {
+      const response = await fetch(`${this.apiUrl}/api/create-customer-portal-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ customerEmail: customerEmail.trim() })
