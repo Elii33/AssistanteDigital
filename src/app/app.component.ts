@@ -29,6 +29,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import { AboutMeComponent } from './components/about-me/about-me.component';
 import { AboutStoryComponent } from './components/about-story/about-story.component';
 import { SeoService } from './services/seo.service';
+import { AnalyticsService } from './services/analytics.service';
 import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
 import { RecognitionComponent } from "./components/recognition/recognition.component";
 
@@ -57,17 +58,26 @@ import { RecognitionComponent } from "./components/recognition/recognition.compo
 export class AppComponent implements OnInit {
   title = 'Mon Entreprise Landing';
 
-  constructor(private seoService: SeoService) {}
+  constructor(
+    private seoService: SeoService,
+    private analyticsService: AnalyticsService
+  ) {}
 
   ngOnInit() {
+    // Initialise Google Analytics 4 pour elisassist.com
+    this.analyticsService.initialize({
+      measurementId: 'G-DTNWB96R8W',
+      debug: false
+    });
+
     this.seoService.updateMetaTags({
       title: 'Assistante Virtuelle & Digitale | Automatisation Notion Make Canva',
       description: 'Assistante virtuelle & digitale spécialisée en automatisation avec Notion, Make, Zapier et Canva. Optimisez votre gestion administrative, réseaux sociaux et workflows. Gagnez du temps pour votre business.',
       keywords: 'assistante virtuelle, assistante digitale, automatisation, notion, make, zapier, canva, gestion administrative, réseaux sociaux, automation, workflow, productivité, freelance, gestion tâches, organisation digitale',
-      author: 'Assistante Digitale Pro',
+      author: 'Elis Assist',
       type: 'website',
-      url: 'https://votresite.com',
-      image: 'https://votresite.com/assets/og-image.jpg'
+      url: 'https://elisassist.com',
+      image: 'https://elisassist.com/assets/og-image.jpg'
     });
 
     this.seoService.createStructuredData();

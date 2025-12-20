@@ -1,0 +1,320 @@
+<div class="admin-seo-dashboard">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h1>Dashboard SEO & Analyse TF-IDF</h1>
+    <p class="subtitle">Analysez et optimisez votre contenu pour le référencement</p>
+  </header>
+
+  <!-- Navigation par onglets -->
+  <nav class="tabs-nav">
+    <button
+      [class.active]="activeTab === 'analyzer'"
+      (click)="activeTab = 'analyzer'"
+    >
+      Analyseur
+    </button>
+    <button
+      [class.active]="activeTab === 'keywords'"
+      (click)="activeTab = 'keywords'"
+    >
+      Mots-clés
+    </button>
+    <button
+      [class.active]="activeTab === 'comparison'"
+      (click)="activeTab = 'comparison'"
+    >
+      Comparaison
+    </button>
+    <button
+      [class.active]="activeTab === 'settings'"
+      (click)="activeTab = 'settings'"
+    >
+      Paramètres
+    </button>
+  </nav>
+
+  <!-- Contenu des onglets -->
+  <main class="tab-content">
+    <!-- Onglet Analyseur -->
+    <div *ngIf="activeTab === 'analyzer'" class="analyzer-tab">
+      <!-- Sélection de page -->
+      <section class="section">
+        <h2>Analyser une page du site</h2>
+        <div class="page-selector">
+          <button
+            *ngFor="let page of sitePages"
+            class="page-btn"
+            (click)="analyzePage(page)"
+            [disabled]="isAnalyzing"
+          >
+            {{ page.name }}
+          </button>
+        </div>
+      </section>
+
+      <!-- Contenu personnalisé -->
+      <section class="section">
+        <h2>Ou analyser un contenu personnalisé</h2>
+        <div class="custom-content-form">
+          <div class="form-row">
+            <input
+              type="text"
+              [(ngModel)]="customTitle"
+              placeholder="Titre de la page"
+              class="input-field"
+            />
+            <input
+              type="text"
+              [(ngModel)]="customUrl"
+              placeholder="URL (optionnel)"
+              class="input-field"
+            />
+          </div>
+          <textarea
+            [(ngModel)]="customContent"
+            placeholder="Collez votre contenu ici..."
+            rows="6"
+            class="textarea-field"
+          ></textarea>
+          <button
+            class="analyze-btn"
+            (click)="analyzeCustomContent()"
+            [disabled]="isAnalyzing || !customContent.trim()"
+          >
+            {{ isAnalyzing ? 'Analyse en cours...' : 'Analyser le contenu' }}
+          </button>
+        </div>
+      </section>
+
+      <!-- Résultats d'analyse -->
+      <section *ngIf="currentAnalysis" class="section results-section">
+        <h2>Résultats de l'analyse</h2>
+
+        <!-- Scores principaux -->
+        <div class="scores-grid">
+          <div class="score-card" [ngClass]="getSEOScoreClass(currentAnalysis.seoScore)">
+            <span class="score-value">{{ currentAnalysis.seoScore }}</span>
+            <span class="score-label">Score SEO</span>
+            <span class="score-status">{{ getSEOScoreLabel(currentAnalysis.seoScore) }}</span>
+          </div>
+          <div class="score-card">
+            <span class="score-value">{{ currentAnalysis.readabilityScore }}</span>
+            <span class="score-label">Lisibilité</span>
+          </div>
+          <div class="score-card">
+            <span class="score-value">{{ currentAnalysis.wordCount }}</span>
+            <span class="score-label">Mots</span>
+          </div>
+          <div class="score-card">
+            <span class="score-value">{{ currentAnalysis.uniqueWords }}</span>
+            <span class="score-label">Mots uniques</span>
+          </div>
+        </div>
+
+        <!-- Top termes TF-IDF -->
+        <div class="results-grid">
+          <div class="result-card">
+            <h3>Top Termes (TF-IDF)</h3>
+            <div class="terms-list">
+              <div *ngFor="let term of currentAnalysis.topTerms.slice(0, 10)" class="term-item">
+                <span class="term-name">{{ term.term }}</span>
+                <span class="term-count">{{ term.count }}x</span>
+                <div class="term-bar">
+                  <div
+                    class="term-bar-fill"
+                    [style.width.%]="(term.tfidf / currentAnalysis.topTerms[0].tfidf) * 100"
+                  ></div>
+                </div>
+                <span class="term-score">{{ (term.tfidf * 100).toFixed(1) }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Densité des mots-clés -->
+          <div class="result-card">
+            <h3>Densité des mots-clés cibles</h3>
+            <div class="density-list">
+              <div
+                *ngFor="let entry of getKeywordDensityEntries()"
+                class="density-item"
+                [class.density-zero]="entry.density === 0"
+                [class.density-low]="entry.density > 0 && entry.density < 0.5"
+                [class.density-good]="entry.density >= 0.5 && entry.density <= 2.5"
+                [class.density-high]="entry.density > 2.5"
+              >
+                <span class="keyword-name">{{ entry.keyword }}</span>
+                <span class="keyword-density">{{ formatDensity(entry.density) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommandations -->
+        <div class="result-card recommendations-card">
+          <h3>Recommandations</h3>
+          <ul class="recommendations-list">
+            <li *ngFor="let rec of currentAnalysis.recommendations" class="recommendation-item">
+              {{ rec }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Suggestions d'amélioration -->
+        <div *ngIf="contentSuggestions.length > 0" class="result-card suggestions-card">
+          <h3>Suggestions d'amélioration</h3>
+          <div class="suggestions-list">
+            <div
+              *ngFor="let suggestion of contentSuggestions"
+              class="suggestion-item"
+              [ngClass]="getPriorityClass(suggestion.priority)"
+            >
+              <span class="action-icon">{{ getActionIcon(suggestion.action) }}</span>
+              <span class="suggestion-keyword">{{ suggestion.keyword }}</span>
+              <span class="suggestion-current">Actuel: {{ formatDensity(suggestion.currentDensity) }}</span>
+              <span class="suggestion-target">Cible: {{ formatDensity(suggestion.recommendedDensity) }}</span>
+              <span class="priority-badge">{{ suggestion.priority }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Onglet Mots-clés -->
+    <div *ngIf="activeTab === 'keywords'" class="keywords-tab">
+      <section class="section">
+        <h2>Mots-clés cibles pour l'analyse</h2>
+        <p class="section-description">
+          Ces mots-clés sont utilisés pour calculer la densité et générer des recommandations SEO.
+        </p>
+
+        <!-- Ajout de mot-clé -->
+        <div class="add-keyword-form">
+          <input
+            type="text"
+            [(ngModel)]="newKeyword"
+            placeholder="Ajouter un mot-clé..."
+            class="input-field"
+            (keyup.enter)="addKeyword()"
+          />
+          <button class="add-btn" (click)="addKeyword()" [disabled]="!newKeyword.trim()">
+            Ajouter
+          </button>
+        </div>
+
+        <!-- Liste des mots-clés -->
+        <div class="keywords-list">
+          <div *ngFor="let keyword of targetKeywords" class="keyword-tag">
+            <span>{{ keyword }}</span>
+            <button class="remove-btn" (click)="removeKeyword(keyword)">x</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Onglet Comparaison -->
+    <div *ngIf="activeTab === 'comparison'" class="comparison-tab">
+      <section class="section">
+        <h2>Comparer deux contenus</h2>
+        <p class="section-description">
+          Analysez la similarité entre deux textes et identifiez les termes communs et uniques.
+        </p>
+
+        <div class="comparison-grid">
+          <div class="comparison-input">
+            <label>Document 1</label>
+            <textarea
+              [(ngModel)]="comparisonDoc1"
+              placeholder="Collez le premier contenu..."
+              rows="8"
+              class="textarea-field"
+            ></textarea>
+          </div>
+          <div class="comparison-input">
+            <label>Document 2</label>
+            <textarea
+              [(ngModel)]="comparisonDoc2"
+              placeholder="Collez le second contenu..."
+              rows="8"
+              class="textarea-field"
+            ></textarea>
+          </div>
+        </div>
+
+        <button
+          class="compare-btn"
+          (click)="compareDocuments()"
+          [disabled]="!comparisonDoc1.trim() || !comparisonDoc2.trim()"
+        >
+          Comparer
+        </button>
+
+        <!-- Résultats de comparaison -->
+        <div *ngIf="comparisonResult" class="comparison-results">
+          <div class="similarity-score">
+            <span class="score-value">{{ comparisonResult.similarity }}%</span>
+            <span class="score-label">Similarité</span>
+          </div>
+
+          <div class="comparison-details">
+            <div class="detail-card">
+              <h4>Termes communs ({{ comparisonResult.commonTerms.length }})</h4>
+              <div class="terms-cloud">
+                <span *ngFor="let term of comparisonResult.commonTerms.slice(0, 20)" class="term-badge common">
+                  {{ term }}
+                </span>
+              </div>
+            </div>
+            <div class="detail-card">
+              <h4>Unique au Doc 1 ({{ comparisonResult.uniqueToDoc1.length }})</h4>
+              <div class="terms-cloud">
+                <span *ngFor="let term of comparisonResult.uniqueToDoc1.slice(0, 15)" class="term-badge unique1">
+                  {{ term }}
+                </span>
+              </div>
+            </div>
+            <div class="detail-card">
+              <h4>Unique au Doc 2 ({{ comparisonResult.uniqueToDoc2.length }})</h4>
+              <div class="terms-cloud">
+                <span *ngFor="let term of comparisonResult.uniqueToDoc2.slice(0, 15)" class="term-badge unique2">
+                  {{ term }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Onglet Paramètres -->
+    <div *ngIf="activeTab === 'settings'" class="settings-tab">
+      <section class="section">
+        <h2>Paramètres de l'analyse SEO</h2>
+
+        <div class="settings-card">
+          <h3>Google Analytics</h3>
+          <p>ID de mesure: <code>G-XXXXXXXXXX</code></p>
+          <p class="help-text">
+            Pour activer Google Analytics, remplacez l'ID dans le fichier
+            <code>analytics.service.ts</code> par votre ID GA4.
+          </p>
+        </div>
+
+        <div class="settings-card">
+          <h3>Configuration TF-IDF</h3>
+          <p>Corpus de référence: {{ sitePages.length }} documents</p>
+          <p>Mots-clés cibles: {{ targetKeywords.length }}</p>
+        </div>
+
+        <div class="settings-card">
+          <h3>Seuils recommandés</h3>
+          <ul>
+            <li>Densité de mots-clés idéale: 0.5% - 2.5%</li>
+            <li>Longueur minimale de contenu: 300 mots</li>
+            <li>Longueur de titre: 30-60 caractères</li>
+            <li>Score SEO cible: 80+</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
