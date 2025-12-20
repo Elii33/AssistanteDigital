@@ -10,7 +10,7 @@
  * ============================================================================
  */
 
-import { Component, OnInit, OnDestroy, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface JourneyCard {
@@ -71,42 +71,15 @@ export class WhoAmIComponent implements OnInit, OnDestroy {
     }
   ];
 
-  private scrollHandler: (() => void) | null = null;
-
   constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.scrollHandler = () => this.checkCardsVisibility();
-    window.addEventListener('scroll', this.scrollHandler, { passive: true });
-    // Initial check
-    setTimeout(() => this.checkCardsVisibility(), 100);
+    // Les cartes commencent sur la face blanche (isFlipped: false)
+    // Elles ne se retournent que quand l'utilisateur clique dessus
   }
 
   ngOnDestroy(): void {
-    if (this.scrollHandler) {
-      window.removeEventListener('scroll', this.scrollHandler);
-    }
-  }
-
-  private checkCardsVisibility(): void {
-    const cards = this.elementRef.nativeElement.querySelectorAll('.journey-card');
-
-    cards.forEach((card: Element, index: number) => {
-      const rect = card.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Flip la carte quand elle est visible à 40% dans la fenêtre
-      const visibilityThreshold = windowHeight * 0.6;
-
-      if (rect.top < visibilityThreshold && rect.bottom > 0) {
-        if (!this.journeyCards[index].isFlipped) {
-          // Ajouter un délai pour un effet cascade
-          setTimeout(() => {
-            this.journeyCards[index].isFlipped = true;
-          }, index * 150);
-        }
-      }
-    });
+    // Rien à nettoyer
   }
 
   toggleCard(index: number): void {

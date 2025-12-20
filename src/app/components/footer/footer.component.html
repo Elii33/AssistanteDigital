@@ -25,7 +25,7 @@
         <!-- Colonne 2 -->
         <div class="text-center sm:text-left">
           <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gold-400">Navigation</h4>
-          <ul class="space-y-1.5 sm:space-y-2 flex flex-wrap justify-center sm:justify-start sm:block gap-x-4 sm:gap-x-0">
+          <ul class="space-y-1.5 sm:space-y-2 grid grid-cols-2 sm:block gap-x-2 gap-y-1.5 sm:gap-x-0">
             <li>
               <a (click)="scrollToSection('home')"
                  class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group text-sm sm:text-base">
@@ -50,7 +50,7 @@
                 <span class="group-hover:mr-2 transition-all">→</span> Outils
               </a>
             </li>
-            <li>
+            <li class="col-span-2 sm:col-span-1">
               <a (click)="scrollToSection('contact')"
                  class="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 hover:translate-x-2 inline-block group text-sm sm:text-base">
                 <span class="group-hover:mr-2 transition-all">→</span> Contact
@@ -62,7 +62,7 @@
         <!-- Colonne 3 -->
         <div class="text-center sm:text-left sm:col-span-2 md:col-span-1">
           <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gold-500">Réseaux & Contact</h4>
-          <ul class="space-y-2 sm:space-y-3 text-gray-400 flex flex-wrap justify-center sm:justify-start sm:block gap-x-4 sm:gap-x-0">
+          <ul class="text-gray-400 grid grid-cols-3 sm:block gap-x-2 gap-y-2 sm:space-y-3">
             <li>
               <a href="mailto:contact@example.com"
                  class="inline-flex items-center hover:text-white transition-all duration-300 group text-sm sm:text-base">
@@ -104,7 +104,7 @@
             © {{ currentYear }} elisassist Assistante Digitale • TVA non applicable, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000052488142" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300 transition-colors font-medium">art. 293 B du CGI</a>
           </p>
           <p class="text-center md:text-right text-gray-500 text-xs">
-            en colaboration avec
+            En colaboration avec
             <a href="https://nonodevco.com" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300 transition-colors font-medium">
               nonodevco
             </a>
