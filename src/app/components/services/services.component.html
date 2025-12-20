@@ -1,16 +1,16 @@
-<section id="services" class="py-20 bg-white relative overflow-hidden">
+<section id="services" class="py-12 sm:py-16 md:py-20 bg-white relative overflow-hidden">
   <!-- Effet de fond -->
   <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-beige-100 to-transparent opacity-50"></div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center mb-16"
+    <div class="text-center mb-10 sm:mb-12 md:mb-16"
          [class.animate-slide-up]="servicesVisible"
          [class.opacity-0]="!servicesVisible">
-      <h2 class="section-title">Mes Services</h2>
-      <p class="section-subtitle">Des solutions sur-mesure pour booster votre productivité</p>
+      <h2 class="section-title text-2xl sm:text-3xl md:text-4xl">Mes Services</h2>
+      <p class="section-subtitle text-sm sm:text-base md:text-lg">Des solutions sur-mesure pour booster votre productivité</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto mb-10 sm:mb-16">
       <!-- Offre 1: Gestion Administrative -->
       <div class="service-card group relative overflow-hidden transition-all duration-500"
            [class.animate-slide-in-left]="servicesVisible"
@@ -21,74 +21,74 @@
            style="transform-style: preserve-3d; perspective: 1000px;">
         <div class="absolute inset-0 bg-gradient-to-br from-gold-100 to-beige-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="relative z-10">
-          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-all duration-500">
+          <div class="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4 transform group-hover:scale-110 transition-all duration-500">
             📋
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-gold-600 transition-colors">
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 group-hover:text-gold-600 transition-colors">
             Gestion Administrative
           </h3>
-          <p class="text-gray-600 mb-6">
+          <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">
             Je prends en charge votre organisation quotidienne pour que vous puissiez vous concentrer sur l'essentiel.
           </p>
-          <ul class="space-y-3 mb-6">
+          <ul class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
             <li class="flex items-start transform hover:translate-x-2 transition-transform">
-              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
-              <span class="text-gray-700">Gestion d'emails et filtrage prioritaire</span>
+              <span class="text-gray-700 text-sm sm:text-base">Gestion d'emails et filtrage prioritaire</span>
             </li>
             <li class="flex items-start transform hover:translate-x-2 transition-transform">
-              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
-              <span class="text-gray-700">Organisation de calendrier et rendez-vous</span>
+              <span class="text-gray-700 text-sm sm:text-base">Organisation de calendrier et rendez-vous</span>
             </li>
             <li class="flex items-start transform hover:translate-x-2 transition-transform">
-              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
-              <span class="text-gray-700">Gestion documentaire (Drive, Dropbox)</span>
+              <span class="text-gray-700 text-sm sm:text-base">Gestion documentaire (Drive, Dropbox)</span>
             </li>
             <li class="flex items-start transform hover:translate-x-2 transition-transform">
-              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
-              <span class="text-gray-700">Rédaction et mise en forme de documents</span>
+              <span class="text-gray-700 text-sm sm:text-base">Rédaction et mise en forme de documents</span>
             </li>
             <li class="flex items-start transform hover:translate-x-2 transition-transform">
-              <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
-              <span class="text-gray-700">Saisie de données et reporting</span>
+              <span class="text-gray-700 text-sm sm:text-base">Saisie de données et reporting</span>
             </li>
           </ul>
-          <div class="border-t pt-4">
-            <p class="text-2xl font-bold text-gold-600 mb-1">À partir de 25€/h</p>
-            <p class="text-sm text-gray-500 mb-4">ou forfait mensuel dès 400€</p>
+          <div class="border-t pt-3 sm:pt-4">
+            <p class="text-xl sm:text-2xl font-bold text-gold-600 mb-1">À partir de 25€/h</p>
+            <p class="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">ou forfait mensuel dès 400€</p>
 
             <!-- Sélecteur d'heures -->
-            <div class="bg-beige-50 rounded-xl p-4 mt-4 border border-beige-200">
-              <label class="text-sm font-medium text-gray-700 block mb-3">Combien d'heures souhaitez-vous ?</label>
-              <div class="flex items-center justify-between gap-3">
+            <div class="bg-beige-50 rounded-xl p-3 sm:p-4 mt-3 sm:mt-4 border border-beige-200">
+              <label class="text-xs sm:text-sm font-medium text-gray-700 block mb-2 sm:mb-3">Combien d'heures souhaitez-vous ?</label>
+              <div class="flex items-center justify-between gap-2 sm:gap-3">
                 <button
                   (click)="decrementHours(0); $event.stopPropagation()"
                   [disabled]="getService(0).selectedHours <= getService(0).minHours"
-                  class="w-10 h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-lg sm:text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
                   −
                 </button>
                 <div class="text-center flex-1">
-                  <span class="text-3xl font-bold text-gray-900">{{ getService(0).selectedHours }}</span>
+                  <span class="text-2xl sm:text-3xl font-bold text-gray-900">{{ getService(0).selectedHours }}</span>
                   <span class="text-gray-500 ml-1">h</span>
                 </div>
                 <button
                   (click)="incrementHours(0); $event.stopPropagation()"
                   [disabled]="getService(0).selectedHours >= getService(0).maxHours"
-                  class="w-10 h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-lg sm:text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
                   +
                 </button>
               </div>
-              <div class="text-center mt-3 py-2 bg-white rounded-lg">
-                <span class="text-xl font-bold text-gold-600">Total: {{ calculateTotal(0) }}€</span>
+              <div class="text-center mt-2 sm:mt-3 py-2 bg-white rounded-lg">
+                <span class="text-lg sm:text-xl font-bold text-gold-600">Total: {{ calculateTotal(0) }}€</span>
               </div>
               <button
                 (click)="payHourly(0); $event.stopPropagation()"
@@ -326,132 +326,132 @@
     </div>
 
     <!-- Packages Forfaitaires -->
-    <div class="mt-20 max-w-6xl mx-auto"
+    <div class="mt-12 sm:mt-16 md:mt-20 max-w-6xl mx-auto"
          [class.animate-fade-in-up]="servicesVisible"
          [class.opacity-0]="!servicesVisible"
          style="animation-delay: 0.6s">
-      <div class="text-center mb-12">
-        <h3 class="text-3xl font-bold text-gray-900 mb-4">Formules Tout-en-Un</h3>
-        <p class="text-lg text-gray-600">
+      <div class="text-center mb-8 sm:mb-10 md:mb-12">
+        <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Formules Tout-en-Un</h3>
+        <p class="text-sm sm:text-base md:text-lg text-gray-600 px-4 sm:px-0">
           Optez pour un forfait mensuel et bénéficiez d'un accompagnement complet
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 px-2 sm:px-0">
         <!-- Pack Starter -->
-        <div class="package-card bg-gradient-to-br from-white to-beige-50 p-8 rounded-2xl shadow-lg border border-beige-200">
-          <div class="text-center mb-6">
-            <h4 class="text-2xl font-bold text-gray-900 mb-2">Starter</h4>
-            <p class="text-gray-600 text-sm">Pour démarrer en douceur</p>
+        <div class="package-card bg-gradient-to-br from-white to-beige-50 p-6 sm:p-8 rounded-2xl shadow-lg border border-beige-200">
+          <div class="text-center mb-4 sm:mb-6">
+            <h4 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Starter</h4>
+            <p class="text-gray-600 text-xs sm:text-sm">Pour démarrer en douceur</p>
           </div>
-          <div class="text-center mb-6">
-            <span class="text-5xl font-bold text-gold-600">400€</span>
+          <div class="text-center mb-4 sm:mb-6">
+            <span class="text-4xl sm:text-5xl font-bold text-gold-600">400€</span>
             <span class="text-gray-500">/mois</span>
           </div>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-600 mr-2 text-xl">✓</span>
+          <ul class="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-600 mr-2 text-lg sm:text-xl">✓</span>
               10h d'assistance mensuelle
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-600 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-600 mr-2 text-lg sm:text-xl">✓</span>
               Gestion emails & calendrier
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-600 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-600 mr-2 text-lg sm:text-xl">✓</span>
               Support par email
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-600 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-600 mr-2 text-lg sm:text-xl">✓</span>
               1 automatisation simple/mois
             </li>
           </ul>
-          <button class="w-full btn-secondary" (click)="selectPlan('essential')">Choisir Starter</button>
+          <button class="w-full btn-secondary text-sm sm:text-base" (click)="selectPlan('essential')">Choisir Starter</button>
         </div>
 
-        <!-- Pack Pro - RECOMMANDÉ -->
-        <div class="package-card bg-gradient-to-br from-gold-600 to-beige-800 p-8 rounded-2xl shadow-2xl transform scale-110 relative overflow-hidden border-4 border-purple-400">
-          <div class="absolute top-4 right-4">
-            <span class="bg-white text-gold-700 text-xs font-bold px-3 py-1 rounded-full">
+        <!-- Pack Pro - RECOMMANDÉ - scale seulement sur md+ -->
+        <div class="package-card bg-gradient-to-br from-gold-600 to-beige-800 p-6 sm:p-8 rounded-2xl shadow-2xl md:transform md:scale-105 lg:scale-110 relative overflow-hidden border-4 border-purple-400 order-first md:order-none">
+          <div class="absolute top-3 sm:top-4 right-3 sm:right-4">
+            <span class="bg-white text-gold-700 text-xs font-bold px-2 sm:px-3 py-1 rounded-full">
               RECOMMANDÉ
             </span>
           </div>
-          <div class="text-center mb-6">
-            <h4 class="text-2xl font-bold text-white mb-2">Pro</h4>
-            <p class="text-purple-100 text-sm">Le meilleur rapport qualité/prix</p>
+          <div class="text-center mb-4 sm:mb-6 pt-2 sm:pt-0">
+            <h4 class="text-xl sm:text-2xl font-bold text-white mb-2">Pro</h4>
+            <p class="text-purple-100 text-xs sm:text-sm">Le meilleur rapport qualité/prix</p>
           </div>
-          <div class="text-center mb-6">
-            <span class="text-5xl font-bold text-white">750€</span>
+          <div class="text-center mb-4 sm:mb-6">
+            <span class="text-4xl sm:text-5xl font-bold text-white">750€</span>
             <span class="text-purple-100">/mois</span>
           </div>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-white">
-              <span class="text-yellow-300 mr-2 text-xl">✓</span>
+          <ul class="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+            <li class="flex items-center text-white text-sm sm:text-base">
+              <span class="text-yellow-300 mr-2 text-lg sm:text-xl">✓</span>
               20h d'assistance mensuelle
             </li>
-            <li class="flex items-center text-white">
-              <span class="text-yellow-300 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-white text-sm sm:text-base">
+              <span class="text-yellow-300 mr-2 text-lg sm:text-xl">✓</span>
               Tout inclus (admin + auto + social)
             </li>
-            <li class="flex items-center text-white">
-              <span class="text-yellow-300 mr-2 text-xl">✓</span>
-              Support prioritaire < 2h
+            <li class="flex items-center text-white text-sm sm:text-base">
+              <span class="text-yellow-300 mr-2 text-lg sm:text-xl">✓</span>
+              Support prioritaire &lt; 2h
             </li>
-            <li class="flex items-center text-white">
-              <span class="text-yellow-300 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-white text-sm sm:text-base">
+              <span class="text-yellow-300 mr-2 text-lg sm:text-xl">✓</span>
               3 automatisations/mois
             </li>
-            <li class="flex items-center text-white">
-              <span class="text-yellow-300 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-white text-sm sm:text-base">
+              <span class="text-yellow-300 mr-2 text-lg sm:text-xl">✓</span>
               Dashboard Notion personnalisé
             </li>
           </ul>
-          <button class="w-full bg-white text-gold-700 font-bold py-3 px-6 rounded-lg hover:bg-purple-50 transition-colors duration-300 shadow-lg" (click)="selectPlan('pro')">
+          <button class="w-full bg-white text-gold-700 font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-purple-50 transition-colors duration-300 shadow-lg text-sm sm:text-base" (click)="selectPlan('pro')">
             Choisir Pro
           </button>
         </div>
 
         <!-- Pack Premium -->
-        <div class="package-card bg-gradient-to-br from-white to-beige-100 p-8 rounded-2xl shadow-lg border border-beige-300">
-          <div class="text-center mb-6">
-            <h4 class="text-2xl font-bold text-gray-900 mb-2">Premium</h4>
-            <p class="text-gray-600 text-sm">Accompagnement complet</p>
+        <div class="package-card bg-gradient-to-br from-white to-beige-100 p-6 sm:p-8 rounded-2xl shadow-lg border border-beige-300">
+          <div class="text-center mb-4 sm:mb-6">
+            <h4 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Premium</h4>
+            <p class="text-gray-600 text-xs sm:text-sm">Accompagnement complet</p>
           </div>
-          <div class="text-center mb-6">
-            <span class="text-5xl font-bold bg-gradient-to-r from-gold-600 to-beige-800 bg-clip-text text-transparent">1200€</span>
+          <div class="text-center mb-4 sm:mb-6">
+            <span class="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-gold-600 to-beige-800 bg-clip-text text-transparent">1200€</span>
             <span class="text-gray-500">/mois</span>
           </div>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
+          <ul class="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
               35h d'assistance mensuelle
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
               Service complet illimité
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
-              Support 7j/7 < 1h
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
+              Support 7j/7 &lt; 1h
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
               Automatisations illimitées
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
               Stratégie réseaux sociaux complète
             </li>
-            <li class="flex items-center text-gray-700">
-              <span class="text-gold-700 mr-2 text-xl">✓</span>
+            <li class="flex items-center text-gray-700 text-sm sm:text-base">
+              <span class="text-gold-700 mr-2 text-lg sm:text-xl">✓</span>
               Reporting mensuel détaillé
             </li>
           </ul>
-          <button class="w-full btn-secondary" (click)="selectPlan('premium')">Choisir Premium</button>
+          <button class="w-full btn-secondary text-sm sm:text-base" (click)="selectPlan('premium')">Choisir Premium</button>
         </div>
       </div>
 
-      <p class="text-center text-sm text-gray-500 mt-8">
+      <p class="text-center text-xs sm:text-sm text-gray-500 mt-6 sm:mt-8 px-4 sm:px-0">
         💡 Tous les forfaits sont sans engagement • Paiement mensuel • Annulation à tout moment
       </p>
 

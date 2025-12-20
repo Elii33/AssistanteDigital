@@ -165,27 +165,95 @@
 
 @media (max-width: 768px) {
   .journey-card {
-    height: 280px;
+    height: 260px;
   }
 
   .card-front,
   .card-back {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 
   .card-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-icon-back {
     font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-period {
+    font-size: 0.625rem;
+    padding: 0.2rem 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .card-title {
-    font-size: 1rem;
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
   }
 
   .card-text {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   .card-text-back {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .card-hint {
+    font-size: 0.6875rem;
+    padding-top: 0.5rem;
+  }
+
+  .card-number {
+    font-size: 0.625rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .journey-card {
+    height: 240px;
+  }
+
+  .card-front,
+  .card-back {
+    padding: 0.875rem;
+  }
+
+  .card-icon {
+    font-size: 1.5rem;
+  }
+
+  .card-icon-back {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 0.875rem;
+  }
+
+  .card-text {
+    font-size: 0.75rem;
+  }
+
+  .card-text-back {
+    font-size: 0.8125rem;
+  }
+
+  .card-hint {
+    font-size: 0.625rem;
+    gap: 0.25rem;
+  }
+
+  .card-hint svg {
+    width: 0.75rem;
+    height: 0.75rem;
   }
 }
