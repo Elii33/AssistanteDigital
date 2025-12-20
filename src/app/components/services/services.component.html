@@ -304,7 +304,8 @@
               <button
                 (click)="payHourly(2); $event.stopPropagation()"
                 [disabled]="isLoadingHourly['social']"
-                class="w-full mt-3 bg-gradient-to-r from-beige-600 to-beige-800 text-white font-semibold py-3 px-4 rounded-lg hover:opacity-90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">
+                class="w-full mt-3 text-white font-semibold py-3 px-4 rounded-lg hover:opacity-90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                style="background: linear-gradient(to right, #ca8a04, #a16207);">
                 <span *ngIf="!isLoadingHourly['social']">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
