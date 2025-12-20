@@ -43,7 +43,12 @@ export class AboutComponent {
     { name: 'Zoom', category: 'communication', icon: '🎥' },
     { name: 'Gmail', category: 'communication', icon: '✉️' },
     { name: 'Google Meet', category: 'communication', icon: '📹' },
-    { name: 'WhatsApp', category: 'communication', icon: '📲' }
+    { name: 'WhatsApp', category: 'communication', icon: '📲' },
+    // No-Code & E-commerce
+    { name: 'Shopify', category: 'nocode', icon: '🛍️' },
+    { name: 'WordPress', category: 'nocode', icon: '📰' },
+    { name: 'Webflow', category: 'nocode', icon: '🌐' },
+    { name: 'Wix', category: 'nocode', icon: '✨' }
   ];
 
   getSkillsByCategory(category: string) {
