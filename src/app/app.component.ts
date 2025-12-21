@@ -92,7 +92,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 100); // Petit délai pour s'assurer que le DOM est prêt
+      }, 500); // Délai augmenté pour s'assurer que tous les composants sont rendus
     }
   }
 

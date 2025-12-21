@@ -70,31 +70,20 @@ async function generateInvoicePDF(invoiceData) {
     doc.pipe(writeStream);
 
     // ===== EN-TÊTE =====
-    // Fond doré avec dégradé simulé
-    doc.rect(0, 0, 595, 130).fill('#ca8a04');
+    // Fond blanc/beige clair pour mettre en valeur le logo
+    doc.rect(0, 0, 595, 130).fill('#fefce8');
 
-    // Bande décorative dorée claire en bas de l'en-tête
-    doc.rect(0, 120, 595, 10).fill('#eab308');
+    // Bande décorative dorée en bas de l'en-tête
+    doc.rect(0, 120, 595, 10).fill('#ca8a04');
 
-    // Logo (si disponible)
+    // Logo centré (si disponible)
     if (fs.existsSync(logoPath)) {
       try {
-        doc.image(logoPath, 40, 20, { width: 80 });
+        doc.image(logoPath, 220, 10, { width: 150 });
       } catch (e) {
         console.warn('Impossible de charger le logo:', e.message);
       }
     }
-
-    // Nom de l'entreprise (décalé à droite du logo)
-    doc.fillColor('#ffffff')
-       .fontSize(32)
-       .font('Helvetica-Bold')
-       .text('Elisassist', 135, 30);
-
-    doc.fontSize(13)
-       .font('Helvetica')
-       .fillColor('#fef3c7')
-       .text('Assistante Digitale', 135, 70);
 
     // FACTURE badge avec fond
     doc.roundedRect(420, 30, 130, 70, 8).fill('#92400e');
@@ -206,31 +195,31 @@ async function generateInvoicePDF(invoiceData) {
     // ===== TOTAUX =====
     yPosition += 25;
 
-    // Box principale pour les totaux avec coins arrondis
-    doc.roundedRect(350, yPosition - 5, 195, 85, 6).fill('#fefce8').stroke('#ca8a04');
+    // Box principale pour les totaux avec coins arrondis (hauteur augmentée)
+    doc.roundedRect(350, yPosition - 5, 195, 100, 6).fill('#fefce8').stroke('#ca8a04');
 
     // Ligne Total HT
     doc.fillColor('#4b5563')
        .font('Helvetica')
-       .fontSize(10)
-       .text('Total HT', 365, yPosition + 8)
-       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 8, { width: 165, align: 'right' });
+       .fontSize(11)
+       .text('Total HT', 365, yPosition + 12)
+       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 12, { width: 165, align: 'right' });
 
-    // Ligne TVA
-    doc.text('TVA', 365, yPosition + 26)
-       .text('Non applicable', 365, yPosition + 26, { width: 165, align: 'right' });
+    // Ligne TVA (espacement augmenté)
+    doc.text('TVA', 365, yPosition + 35)
+       .text('Non applicable', 365, yPosition + 35, { width: 165, align: 'right' });
 
-    // Séparateur
-    doc.moveTo(360, yPosition + 45).lineTo(535, yPosition + 45).stroke('#ca8a04');
+    // Séparateur (position ajustée)
+    doc.moveTo(360, yPosition + 55).lineTo(535, yPosition + 55).stroke('#ca8a04');
 
-    // Total TTC avec fond doré
-    doc.roundedRect(355, yPosition + 52, 185, 25, 4).fill('#ca8a04');
+    // Total TTC avec fond doré (position et taille ajustées)
+    doc.roundedRect(355, yPosition + 62, 185, 30, 4).fill('#ca8a04');
 
     doc.fillColor('#ffffff')
        .font('Helvetica-Bold')
-       .fontSize(13)
-       .text('TOTAL TTC', 365, yPosition + 58)
-       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 58, { width: 165, align: 'right' });
+       .fontSize(14)
+       .text('TOTAL TTC', 365, yPosition + 70)
+       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 70, { width: 165, align: 'right' });
 
     // ===== MENTIONS LÉGALES =====
     const footerY = 700;
