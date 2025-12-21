@@ -986,52 +986,74 @@ body * {
   }
 }
 
-/* Style de base des mots éclatés */
-.explode-word {
+/* ========================================
+   EFFET APPARITION SÉQUENTIELLE - HERO
+   ======================================== */
+
+/* Style des mots avec dégradé doré */
+.hero-word {
   display: inline-block;
-  margin: 0 0.15em;
-  background: linear-gradient(135deg, #ca8a04 0%, #eab308 30%, #fbbf24 50%, #eab308 70%, #ca8a04 100%);
+  background: linear-gradient(135deg, #b45309 0%, #ca8a04 30%, #eab308 50%, #ca8a04 70%, #b45309 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out, filter 0.1s ease-out;
-  will-change: transform, opacity, filter;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  transition: transform 0.3s ease;
 }
 
-/* Position éclatée initiale (progress = 0) → position normale (progress = 1) */
-.explode-word-1 {
-  /* Part du haut-gauche avec rotation */
-  transform:
-    translateX(calc(-80px * (1 - var(--explode-progress))))
-    translateY(calc(-60px * (1 - var(--explode-progress))))
-    rotate(calc(-15deg * (1 - var(--explode-progress))))
-    scale(calc(0.7 + 0.3 * var(--explode-progress)));
-  opacity: calc(0.3 + 0.7 * var(--explode-progress));
-  filter: blur(calc(4px * (1 - var(--explode-progress))));
+.hero-word:hover {
+  transform: scale(1.05);
 }
 
-.explode-word-2 {
-  /* Part du bas avec légère rotation */
-  transform:
-    translateY(calc(70px * (1 - var(--explode-progress))))
-    rotate(calc(10deg * (1 - var(--explode-progress))))
-    scale(calc(0.6 + 0.4 * var(--explode-progress)));
-  opacity: calc(0.2 + 0.8 * var(--explode-progress));
-  filter: blur(calc(5px * (1 - var(--explode-progress))));
+/* Apparition séquentielle des mots */
+.hero-word-1 {
+  animation: wordFadeIn 0.6s ease-out 0.5s forwards;
 }
 
-.explode-word-3 {
-  /* Part du haut-droite avec rotation inverse */
-  transform:
-    translateX(calc(90px * (1 - var(--explode-progress))))
-    translateY(calc(-50px * (1 - var(--explode-progress))))
-    rotate(calc(20deg * (1 - var(--explode-progress))))
-    scale(calc(0.65 + 0.35 * var(--explode-progress)));
-  opacity: calc(0.25 + 0.75 * var(--explode-progress));
-  filter: blur(calc(4px * (1 - var(--explode-progress))));
+.hero-word-2 {
+  animation: wordFadeIn 0.6s ease-out 0.9s forwards;
 }
 
-/* Effet hover quand les mots sont reconstruits */
-.explode-word:hover {
-  text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+.hero-word-3 {
+  animation: wordFadeIn 0.6s ease-out 1.3s forwards;
+}
+
+@keyframes wordFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Séparateurs entre les mots */
+.hero-separator {
+  display: inline-block;
+  color: #d97706;
+  margin: 0 0.4em;
+  opacity: 0;
+  animation: separatorFadeIn 0.3s ease-out forwards;
+}
+
+.hero-word-1 + .hero-separator {
+  animation-delay: 0.8s;
+}
+
+.hero-word-2 + .hero-separator {
+  animation-delay: 1.2s;
+}
+
+@keyframes separatorFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
