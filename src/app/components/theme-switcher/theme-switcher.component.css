@@ -1,0 +1,185 @@
+/* Widget container */
+.theme-widget {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Bouton principal */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(202, 138, 4, 0.1) 0%, rgba(161, 98, 7, 0.05) 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #a16207;
+}
+
+.theme-toggle:hover {
+  background: linear-gradient(135deg, rgba(202, 138, 4, 0.2) 0%, rgba(161, 98, 7, 0.1) 100%);
+  transform: scale(1.05);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Menu déroulant */
+.theme-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(202, 138, 4, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  min-width: 140px;
+}
+
+.theme-menu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Options du menu */
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #57534e;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.theme-option:hover {
+  background: linear-gradient(135deg, rgba(202, 138, 4, 0.1) 0%, rgba(254, 243, 199, 0.5) 100%);
+  color: #a16207;
+}
+
+.theme-option.active {
+  background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
+  color: white;
+}
+
+.theme-option svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Overlay */
+.theme-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: transparent;
+}
+
+/* Dark mode styles */
+:host-context(body.theme-dark) .theme-toggle {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(250, 204, 21, 0.1) 100%);
+  color: #eab308;
+}
+
+:host-context(body.theme-dark) .theme-toggle:hover {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.25) 0%, rgba(250, 204, 21, 0.15) 100%);
+}
+
+:host-context(body.theme-dark) .theme-menu {
+  background: #1c1c1c;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(234, 179, 8, 0.2);
+}
+
+:host-context(body.theme-dark) .theme-option {
+  color: #d4d4d4;
+}
+
+:host-context(body.theme-dark) .theme-option:hover {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(38, 38, 38, 0.8) 100%);
+  color: #eab308;
+}
+
+:host-context(body.theme-dark) .theme-option.active {
+  background: linear-gradient(135deg, #eab308 0%, #facc15 100%);
+  color: #0a0a0a;
+}
+
+/* Sunset mode styles */
+:host-context(body.theme-dim) .theme-toggle {
+  background: linear-gradient(135deg, rgba(255, 126, 95, 0.15) 0%, rgba(254, 180, 123, 0.1) 100%);
+  color: #ff7e5f;
+}
+
+:host-context(body.theme-dim) .theme-toggle:hover {
+  background: linear-gradient(135deg, rgba(255, 126, 95, 0.25) 0%, rgba(254, 180, 123, 0.15) 100%);
+}
+
+:host-context(body.theme-dim) .theme-menu {
+  background: #2a2233;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 126, 95, 0.2);
+}
+
+:host-context(body.theme-dim) .theme-option {
+  color: #d4c4b5;
+}
+
+:host-context(body.theme-dim) .theme-option:hover {
+  background: linear-gradient(135deg, rgba(255, 126, 95, 0.15) 0%, rgba(47, 38, 57, 0.8) 100%);
+  color: #ff7e5f;
+}
+
+:host-context(body.theme-dim) .theme-option.active {
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  color: #1a1520;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-menu {
+    min-width: 130px;
+  }
+
+  .theme-option {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

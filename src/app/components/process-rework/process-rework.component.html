@@ -1,0 +1,131 @@
+<section id="process-rework" class="process-section" #processSection>
+  <!-- Floating decorative elements -->
+  <div class="floating-decoration deco-1" [@floatingParticle]="particleState"></div>
+  <div class="floating-decoration deco-2" [@floatingParticle]="particleState"></div>
+  <div class="floating-decoration deco-3" [@floatingParticle]="particleState"></div>
+
+  <div class="process-container">
+    <!-- Header with animations -->
+    <div class="process-header" [@headerEntrance]>
+      <span class="process-tag" [@tagPulse]="tagAnimState">Processus</span>
+      <h2 class="process-title">
+        <span class="title-highlight">Comment</span> je travaille
+      </h2>
+      <p class="process-subtitle">Un accompagnement structuré pour des résultats concrets</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="process-content">
+      <!-- Left Column - Details/Summary Accordion -->
+      <div class="details-column">
+        <details
+          *ngFor="let step of steps; let i = index; trackBy: trackByIndex"
+          [attr.name]="'process'"
+          class="process-details"
+          [class.is-open]="activeStep === i"
+          [attr.open]="activeStep === i ? '' : null"
+          (toggle)="onToggle(i, $event)"
+          [@stepCard]="getStepState(i)"
+        >
+          <summary class="process-summary">
+            <!-- Lottie icon container -->
+            <div class="lottie-icon" #stepLottie></div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="summary-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <span class="summary-number">{{ step.number }}</span>
+            <span class="summary-text">{{ step.title }}</span>
+          </summary>
+          <div class="details-content" *ngIf="activeStep === i" [@expandContent]>
+            <p class="content-description">{{ step.description }}</p>
+            <ul class="content-features" [@featureList]>
+              <li *ngFor="let feature of step.features" class="feature-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+                {{ feature }}
+              </li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- Right Column - Images -->
+      <div class="images-column">
+        <!-- Glow effect behind images -->
+        <div class="image-glow" [class.active]="activeStep >= 0"></div>
+
+        <!-- Default image (when nothing open) -->
+        <div class="img-block default-img" [class.visible]="activeStep === -1">
+          <div class="img-wrapper">
+            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?w=800&auto=format&fit=crop" alt="Processus de travail" />
+          </div>
+        </div>
+
+        <!-- Step images -->
+        <div
+          *ngFor="let step of steps; let i = index"
+          class="img-block"
+          [class.visible]="activeStep === i"
+        >
+          <div class="img-wrapper">
+            <img [src]="step.image" [alt]="step.title" />
+            <!-- Image overlay gradient -->
+            <div class="img-overlay"></div>
+          </div>
+          <!-- Step indicator on image -->
+          <div class="img-step-badge" *ngIf="activeStep === i">
+            <span>{{ step.number }}</span>
+          </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <button
+          *ngIf="activeStep >= 0"
+          class="nav-btn nav-prev"
+          [@navButton]
+          (click)="previousStep()"
+          aria-label="Étape précédente"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+          </svg>
+        </button>
+
+        <button
+          *ngIf="activeStep >= 0"
+          class="nav-btn nav-next"
+          [@navButton]
+          (click)="nextStep()"
+          aria-label="Étape suivante"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+
+        <button
+          *ngIf="activeStep >= 0"
+          class="nav-btn nav-exit"
+          [@navButton]
+          (click)="closeAll()"
+          aria-label="Fermer"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <!-- Progress indicator -->
+        <div class="progress-dots" *ngIf="activeStep >= 0">
+          <span
+            *ngFor="let step of steps; let i = index"
+            class="progress-dot"
+            [class.active]="activeStep === i"
+            (click)="activeStep = i"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

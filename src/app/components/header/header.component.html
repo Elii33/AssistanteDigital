@@ -55,10 +55,13 @@
         >
           Devis
         </a>
+        <!-- Theme Switcher -->
+        <app-theme-switcher></app-theme-switcher>
       </div>
 
-      <!-- Mobile Menu Button avec animation -->
-      <div class="md:hidden">
+      <!-- Mobile: Theme Switcher + Menu Button -->
+      <div class="md:hidden flex items-center gap-2">
+        <app-theme-switcher></app-theme-switcher>
         <button
           (click)="toggleMobileMenu()"
           class="text-gray-700 hover:text-gold-600 focus:outline-none transition-all duration-300 hover:scale-110 p-1"

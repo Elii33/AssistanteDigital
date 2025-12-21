@@ -1,0 +1,38 @@
+<div class="splash-container" [class.exiting]="isExiting">
+  <!-- Canvas pour l'effet liquide -->
+  <canvas #canvas class="liquid-canvas"></canvas>
+
+  <!-- Contenu overlay -->
+  <div class="splash-content">
+    <!-- Logo ou titre -->
+    <div class="logo-container">
+      <img src="assets/images/ElisAssist.png" alt="ElisAssist" class="splash-logo" />
+    </div>
+
+    <!-- Tagline -->
+    <p class="tagline">Ton bras droit digital</p>
+
+    <!-- Bouton d'entrée -->
+    <button class="enter-btn" (click)="onEnterClick()">
+      <span class="btn-text">Entrer</span>
+      <span class="btn-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </span>
+    </button>
+
+    <!-- Texte d'indication -->
+    <p class="hint-text">Cliquez pour découvrir</p>
+  </div>
+
+  <!-- Particules décoratives -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+</div>

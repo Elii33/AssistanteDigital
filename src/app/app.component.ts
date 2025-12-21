@@ -16,6 +16,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
@@ -32,6 +33,8 @@ import { SeoService } from './services/seo.service';
 import { AnalyticsService } from './services/analytics.service';
 import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
 import { RecognitionComponent } from "./components/recognition/recognition.component";
+import { SplashScreenComponent } from "./components/splash-screen/splash-screen.component";
+import { ProcessReworkComponent } from "./components/process-rework/process-rework.component";
 
 @Component({
   selector: 'app-root',
@@ -50,18 +53,35 @@ import { RecognitionComponent } from "./components/recognition/recognition.compo
     ContactComponent,
     FooterComponent,
     WhoAmIComponent,
-    RecognitionComponent
-],
+    RecognitionComponent,
+    SplashScreenComponent,
+    ProcessReworkComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('600ms ease-out', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
   title = 'Mon Entreprise Landing';
+  showSplash = true;
 
   constructor(
     private seoService: SeoService,
     private analyticsService: AnalyticsService
   ) {}
+
+  onEnterSite(): void {
+    this.showSplash = false;
+    // Scroll en haut de la page
+    window.scrollTo(0, 0);
+  }
 
   ngOnInit() {
     // Initialise Google Analytics 4 pour elisassist.com
