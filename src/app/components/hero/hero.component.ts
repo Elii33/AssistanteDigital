@@ -1,3 +1,4 @@
+// Hero Component - Explode effect on scroll
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
