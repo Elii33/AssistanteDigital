@@ -17,9 +17,9 @@ const path = require('path');
 // ====== CONFIGURATION ENTREPRISE (pour les factures) ======
 const ENTREPRISE_CONFIG = {
   nom: 'Elisassist Assistante Digitale',
-  adresse: '123 Rue Example',
-  codePostal: '75000',
-  ville: 'Paris',
+  adresse: '17 rue Jannes Barret',
+  codePostal: '33240',
+  ville: 'Saint-André-de-Cubzac',
   siret: '879 865 160 00029',
   email: process.env.EMAIL_USER || 'elisassist@gmail.com',
   telephone: '06 64 66 93 63',
@@ -78,26 +78,29 @@ async function generateInvoicePDF(invoiceData) {
     // Bande décorative dorée en bas de l'en-tête
     doc.rect(0, 130, 595, 10).fill('#ca8a04');
 
-    // Logo centré (si disponible) - agrandi et bien centré
+    // Logo centré dans la zone gauche (avant le badge FACTURE)
     if (fs.existsSync(logoPath)) {
       try {
-        doc.image(logoPath, 200, 20, { width: 180 });
+        // Décalé plus vers la droite pour mieux centrer visuellement
+        doc.image(logoPath, 150, 30, { width: 180 });
       } catch (e) {
         console.warn('Impossible de charger le logo:', e.message);
       }
     }
 
-    // FACTURE badge élégant à droite
-    doc.roundedRect(430, 35, 120, 60, 6).fill('#92400e');
+    // FACTURE badge élégant à droite (orange)
+    doc.roundedRect(430, 35, 120, 60, 6).fill('#ea580c');
 
+    // Texte FACTURE en blanc sur fond orange
     doc.fillColor('#ffffff')
        .fontSize(18)
        .font('Helvetica-Bold')
        .text('FACTURE', 435, 48, { align: 'center', width: 110 });
 
+    // Numéro de facture en blanc
     doc.fontSize(9)
        .font('Helvetica')
-       .fillColor('#fef3c7')
+       .fillColor('#ffffff')
        .text(`N° ${invoiceNumber}`, 435, 72, { align: 'center', width: 110 });
 
     // ===== INFORMATIONS ENTREPRISE & CLIENT =====

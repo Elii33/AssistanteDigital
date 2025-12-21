@@ -849,3 +849,189 @@ body * {
               border-color 300ms ease,
               box-shadow 300ms ease;
 }
+
+/* ===== HERO TITLE WHAOU EFFECT ===== */
+
+/* Animation du dégradé horizontal */
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ========================================
+   EFFET FLASH SÉQUENTIEL - HERO TITLE
+   ======================================== */
+
+/* Animation flash avec apparition lumineuse */
+@keyframes flashIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    text-shadow: 0 0 0 transparent;
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    text-shadow:
+      0 0 30px rgba(251, 191, 36, 1),
+      0 0 60px rgba(251, 191, 36, 0.8),
+      0 0 90px rgba(234, 179, 8, 0.6),
+      0 0 120px rgba(202, 138, 4, 0.4);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 20px rgba(202, 138, 4, 0.3);
+    filter: blur(0);
+  }
+}
+
+/* Animation de pulsation continue après le flash */
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(202, 138, 4, 0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(251, 191, 36, 0.6),
+      0 0 40px rgba(234, 179, 8, 0.4);
+  }
+}
+
+/* Animation du point séparateur */
+@keyframes dotFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.5);
+    color: #fbbf24;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    color: #d97706;
+  }
+}
+
+/* Style de base des mots */
+.hero-flash-word {
+  display: inline-block;
+  opacity: 0;
+  background: linear-gradient(135deg, #ca8a04 0%, #eab308 30%, #fbbf24 50%, #eab308 70%, #ca8a04 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation-fill-mode: forwards;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+/* ========================================
+   EFFET ÉCLATÉ - HERO TITLE
+   ======================================== */
+
+:root {
+  --explode-progress: 0;
+}
+
+/* Animation intro "Avec [logo] c'est" */
+.hero-intro {
+  opacity: 0;
+  animation: fadeSlideIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation du logo - plus gros avec glow subtil */
+.hero-logo {
+  animation: logoFadeIn 1s ease-out 0.4s both;
+  filter: drop-shadow(0 0 10px rgba(202, 138, 4, 0.3));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.hero-logo:hover {
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.6));
+  transform: scale(1.05);
+}
+
+@keyframes logoFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Style de base des mots éclatés */
+.explode-word {
+  display: inline-block;
+  margin: 0 0.15em;
+  background: linear-gradient(135deg, #ca8a04 0%, #eab308 30%, #fbbf24 50%, #eab308 70%, #ca8a04 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out, filter 0.1s ease-out;
+  will-change: transform, opacity, filter;
+}
+
+/* Position éclatée initiale (progress = 0) → position normale (progress = 1) */
+.explode-word-1 {
+  /* Part du haut-gauche avec rotation */
+  transform:
+    translateX(calc(-80px * (1 - var(--explode-progress))))
+    translateY(calc(-60px * (1 - var(--explode-progress))))
+    rotate(calc(-15deg * (1 - var(--explode-progress))))
+    scale(calc(0.7 + 0.3 * var(--explode-progress)));
+  opacity: calc(0.3 + 0.7 * var(--explode-progress));
+  filter: blur(calc(4px * (1 - var(--explode-progress))));
+}
+
+.explode-word-2 {
+  /* Part du bas avec légère rotation */
+  transform:
+    translateY(calc(70px * (1 - var(--explode-progress))))
+    rotate(calc(10deg * (1 - var(--explode-progress))))
+    scale(calc(0.6 + 0.4 * var(--explode-progress)));
+  opacity: calc(0.2 + 0.8 * var(--explode-progress));
+  filter: blur(calc(5px * (1 - var(--explode-progress))));
+}
+
+.explode-word-3 {
+  /* Part du haut-droite avec rotation inverse */
+  transform:
+    translateX(calc(90px * (1 - var(--explode-progress))))
+    translateY(calc(-50px * (1 - var(--explode-progress))))
+    rotate(calc(20deg * (1 - var(--explode-progress))))
+    scale(calc(0.65 + 0.35 * var(--explode-progress)));
+  opacity: calc(0.25 + 0.75 * var(--explode-progress));
+  filter: blur(calc(4px * (1 - var(--explode-progress))));
+}
+
+/* Effet hover quand les mots sont reconstruits */
+.explode-word:hover {
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+}

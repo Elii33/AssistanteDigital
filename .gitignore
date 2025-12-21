@@ -40,4 +40,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment files (secrets)
+.env
+.env.*
+backend/.env
+backend/.env.*
+api/.env
+api/.env.*
  
