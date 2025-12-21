@@ -1,5 +1,13 @@
 /**
- * ElisAssist - Service Factures PDF
+ * ============================================================================
+ * Elisassist Assistante Digitale - Service Factures PDF
+ * ============================================================================
+ *
+ * @copyright 2025 nonodevco - Tous droits réservés
+ * @author    nonodevco (https://nonodevco.com)
+ * @license   Propriétaire - Reproduction et distribution interdites
+ *
+ * ============================================================================
  */
 
 const PDFDocument = require('pdfkit');
@@ -9,13 +17,13 @@ const os = require('os');
 
 // ====== CONFIGURATION ENTREPRISE (pour les factures) ======
 const ENTREPRISE_CONFIG = {
-  nom: 'ElisAssist',
+  nom: 'Elisassist Assistante Digitale',
   adresse: '123 Rue Example',
   codePostal: '75000',
   ville: 'Paris',
-  siret: 'XXX XXX XXX XXXXX',
-  email: process.env.EMAIL_USER || 'contact@example.com',
-  telephone: '06 XX XX XX XX',
+  siret: '879 865 160 00029',
+  email: process.env.EMAIL_USER || 'elisassist@gmail.com',
+  telephone: '06 64 66 93 63',
   mentionTVA: 'TVA non applicable, art. 293 B du CGI'
 };
 
@@ -24,6 +32,9 @@ const invoicesDir = path.join(os.tmpdir(), 'invoices');
 if (!fs.existsSync(invoicesDir)) {
   fs.mkdirSync(invoicesDir, { recursive: true });
 }
+
+// Chemin vers le logo
+const logoPath = path.join(__dirname, '..', 'assets', 'logo.png');
 
 // Fonction pour generer un numero de facture unique
 function generateInvoiceNumber() {
@@ -58,156 +69,201 @@ async function generateInvoicePDF(invoiceData) {
     const writeStream = fs.createWriteStream(filePath);
     doc.pipe(writeStream);
 
-    // ===== EN-TETE =====
-    // Fond dore pour l'en-tete
-    doc.rect(0, 0, 595, 120).fill('#ca8a04');
+    // ===== EN-TÊTE =====
+    // Fond doré avec dégradé simulé
+    doc.rect(0, 0, 595, 130).fill('#ca8a04');
 
-    // Nom de l'entreprise
+    // Bande décorative dorée claire en bas de l'en-tête
+    doc.rect(0, 120, 595, 10).fill('#eab308');
+
+    // Logo (si disponible)
+    if (fs.existsSync(logoPath)) {
+      try {
+        doc.image(logoPath, 40, 20, { width: 80 });
+      } catch (e) {
+        console.warn('Impossible de charger le logo:', e.message);
+      }
+    }
+
+    // Nom de l'entreprise (décalé à droite du logo)
     doc.fillColor('#ffffff')
-       .fontSize(28)
+       .fontSize(32)
        .font('Helvetica-Bold')
-       .text('ElisAssist', 50, 35);
+       .text('Elisassist', 135, 30);
 
-    doc.fontSize(14)
+    doc.fontSize(13)
        .font('Helvetica')
-       .text('Assistante Digitale', 50, 70);
+       .fillColor('#fef3c7')
+       .text('Assistante Digitale', 135, 70);
 
-    // FACTURE badge
+    // FACTURE badge avec fond
+    doc.roundedRect(420, 30, 130, 70, 8).fill('#92400e');
+
     doc.fillColor('#ffffff')
-       .fontSize(24)
+       .fontSize(20)
        .font('Helvetica-Bold')
-       .text('FACTURE', 400, 45, { align: 'right', width: 145 });
+       .text('FACTURE', 425, 45, { align: 'center', width: 120 });
 
-    doc.fontSize(11)
+    doc.fontSize(10)
        .font('Helvetica')
-       .text(`N ${invoiceNumber}`, 400, 75, { align: 'right', width: 145 });
+       .fillColor('#fef3c7')
+       .text(`N° ${invoiceNumber}`, 425, 72, { align: 'center', width: 120 });
 
     // ===== INFORMATIONS ENTREPRISE & CLIENT =====
-    doc.fillColor('#374151');
 
-    // Colonne gauche - Entreprise
-    doc.fontSize(10)
+    // Box Émetteur avec bordure dorée
+    doc.rect(50, 145, 240, 110).fill('#fefce8').stroke('#ca8a04');
+
+    doc.fillColor('#ca8a04')
+       .fontSize(11)
        .font('Helvetica-Bold')
-       .text('EMETTEUR', 50, 145);
+       .text('ÉMETTEUR', 60, 155);
 
     doc.font('Helvetica')
-       .fontSize(10)
-       .fillColor('#6b7280')
-       .text(ENTREPRISE_CONFIG.nom, 50, 162)
-       .text(ENTREPRISE_CONFIG.adresse, 50, 177)
-       .text(`${ENTREPRISE_CONFIG.codePostal} ${ENTREPRISE_CONFIG.ville}`, 50, 192)
-       .text(`SIRET: ${ENTREPRISE_CONFIG.siret}`, 50, 207)
-       .text(`Email: ${ENTREPRISE_CONFIG.email}`, 50, 222)
-       .text(`Tel: ${ENTREPRISE_CONFIG.telephone}`, 50, 237);
+       .fontSize(9)
+       .fillColor('#4b5563')
+       .text(ENTREPRISE_CONFIG.nom, 60, 172)
+       .text(ENTREPRISE_CONFIG.adresse, 60, 186)
+       .text(`${ENTREPRISE_CONFIG.codePostal} ${ENTREPRISE_CONFIG.ville}`, 60, 200)
+       .text(`SIRET: ${ENTREPRISE_CONFIG.siret}`, 60, 214)
+       .text(`Email: ${ENTREPRISE_CONFIG.email}`, 60, 228)
+       .text(`Tél: ${ENTREPRISE_CONFIG.telephone}`, 60, 242);
 
-    // Colonne droite - Client
+    // Box Destinataire avec bordure grise
+    doc.rect(310, 145, 235, 110).fill('#f9fafb').stroke('#d1d5db');
+
     doc.fillColor('#374151')
        .font('Helvetica-Bold')
-       .text('DESTINATAIRE', 350, 145);
+       .fontSize(11)
+       .text('DESTINATAIRE', 320, 155);
 
     doc.font('Helvetica')
-       .fontSize(10)
-       .fillColor('#6b7280')
-       .text(customerName || 'Client', 350, 162)
-       .text(customerEmail, 350, 177);
+       .fontSize(9)
+       .fillColor('#4b5563')
+       .text(customerName || 'Client', 320, 172)
+       .text(customerEmail, 320, 186);
 
     if (customerAddress) {
       const addressLines = customerAddress.split('\n');
-      let yPos = 192;
+      let yPos = 200;
       addressLines.forEach(line => {
-        doc.text(line, 350, yPos);
-        yPos += 15;
+        doc.text(line, 320, yPos);
+        yPos += 14;
       });
     }
 
-    // Date de facture
-    doc.fillColor('#374151')
+    // Date de facture dans la box client
+    doc.fillColor('#ca8a04')
        .font('Helvetica-Bold')
-       .text('Date:', 350, 237);
+       .fontSize(9)
+       .text('Date:', 320, 242);
     doc.font('Helvetica')
-       .fillColor('#6b7280')
-       .text(date || new Date().toLocaleDateString('fr-FR'), 390, 237);
+       .fillColor('#4b5563')
+       .text(date || new Date().toLocaleDateString('fr-FR'), 355, 242);
 
     // ===== TABLEAU DES PRESTATIONS =====
-    const tableTop = 290;
+    const tableTop = 280;
 
-    // En-tete du tableau
-    doc.rect(50, tableTop, 495, 30).fill('#f3f4f6');
+    // En-tête du tableau avec fond doré
+    doc.rect(50, tableTop, 495, 32).fill('#ca8a04');
 
-    doc.fillColor('#374151')
+    doc.fillColor('#ffffff')
        .font('Helvetica-Bold')
        .fontSize(10)
-       .text('DESCRIPTION', 60, tableTop + 10)
-       .text('QTE', 320, tableTop + 10, { width: 50, align: 'center' })
-       .text('PRIX UNIT.', 370, tableTop + 10, { width: 70, align: 'center' })
-       .text('TOTAL', 450, tableTop + 10, { width: 85, align: 'right' });
+       .text('DESCRIPTION', 60, tableTop + 11)
+       .text('QTÉ', 320, tableTop + 11, { width: 50, align: 'center' })
+       .text('PRIX UNIT.', 370, tableTop + 11, { width: 70, align: 'center' })
+       .text('TOTAL', 450, tableTop + 11, { width: 85, align: 'right' });
 
     // Lignes du tableau
-    let yPosition = tableTop + 40;
-
-    doc.font('Helvetica').fillColor('#4b5563');
+    let yPosition = tableTop + 44;
 
     items.forEach((item, index) => {
       // Alternance de couleur de fond
       if (index % 2 === 0) {
-        doc.rect(50, yPosition - 5, 495, 25).fill('#fafafa');
-        doc.fillColor('#4b5563');
+        doc.rect(50, yPosition - 6, 495, 28).fill('#fefce8');
+      } else {
+        doc.rect(50, yPosition - 6, 495, 28).fill('#ffffff');
       }
 
-      doc.fontSize(10)
+      doc.font('Helvetica')
+         .fontSize(10)
+         .fillColor('#374151')
          .text(item.description, 60, yPosition, { width: 250 })
          .text(item.quantity.toString(), 320, yPosition, { width: 50, align: 'center' })
-         .text(`${item.unitPrice.toFixed(2)} EUR`, 370, yPosition, { width: 70, align: 'center' })
-         .text(`${item.total.toFixed(2)} EUR`, 450, yPosition, { width: 85, align: 'right' });
+         .text(`${item.unitPrice.toFixed(2)} €`, 370, yPosition, { width: 70, align: 'center' });
 
-      yPosition += 25;
+      doc.font('Helvetica-Bold')
+         .fillColor('#92400e')
+         .text(`${item.total.toFixed(2)} €`, 450, yPosition, { width: 85, align: 'right' });
+
+      yPosition += 28;
     });
 
-    // Ligne de separation
-    yPosition += 10;
-    doc.moveTo(50, yPosition).lineTo(545, yPosition).stroke('#e5e7eb');
+    // Bordure du tableau
+    doc.rect(50, tableTop, 495, yPosition - tableTop + 5).stroke('#e5e7eb');
 
     // ===== TOTAUX =====
-    yPosition += 20;
+    yPosition += 25;
 
-    // Box pour le total
-    doc.rect(350, yPosition - 5, 195, 60).fill('#fef3c7').stroke('#ca8a04');
+    // Box principale pour les totaux avec coins arrondis
+    doc.roundedRect(350, yPosition - 5, 195, 85, 6).fill('#fefce8').stroke('#ca8a04');
+
+    // Ligne Total HT
+    doc.fillColor('#4b5563')
+       .font('Helvetica')
+       .fontSize(10)
+       .text('Total HT', 365, yPosition + 8)
+       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 8, { width: 165, align: 'right' });
+
+    // Ligne TVA
+    doc.text('TVA', 365, yPosition + 26)
+       .text('Non applicable', 365, yPosition + 26, { width: 165, align: 'right' });
+
+    // Séparateur
+    doc.moveTo(360, yPosition + 45).lineTo(535, yPosition + 45).stroke('#ca8a04');
+
+    // Total TTC avec fond doré
+    doc.roundedRect(355, yPosition + 52, 185, 25, 4).fill('#ca8a04');
+
+    doc.fillColor('#ffffff')
+       .font('Helvetica-Bold')
+       .fontSize(13)
+       .text('TOTAL TTC', 365, yPosition + 58)
+       .text(`${totalHT.toFixed(2)} €`, 365, yPosition + 58, { width: 165, align: 'right' });
+
+    // ===== MENTIONS LÉGALES =====
+    const footerY = 700;
+
+    // Box mentions légales avec bordure légère
+    doc.roundedRect(50, footerY, 495, 75, 4).fill('#fefce8').stroke('#eab308');
 
     doc.fillColor('#92400e')
        .font('Helvetica-Bold')
-       .fontSize(11)
-       .text('Total HT', 360, yPosition + 5)
-       .text(`${totalHT.toFixed(2)} EUR`, 360, yPosition + 5, { width: 175, align: 'right' });
+       .fontSize(9)
+       .text('MENTIONS LÉGALES', 65, footerY + 12);
 
-    doc.fontSize(10)
-       .font('Helvetica')
-       .text('TVA', 360, yPosition + 25)
-       .text('Non applicable', 360, yPosition + 25, { width: 175, align: 'right' });
-
-    doc.font('Helvetica-Bold')
-       .fontSize(14)
-       .fillColor('#ca8a04')
-       .text('TOTAL TTC', 360, yPosition + 45)
-       .text(`${totalHT.toFixed(2)} EUR`, 360, yPosition + 45, { width: 175, align: 'right' });
-
-    // ===== MENTIONS LEGALES =====
-    const footerY = 700;
-
-    doc.rect(50, footerY, 495, 80).fill('#f9fafb');
-
-    doc.fillColor('#6b7280')
+    doc.fillColor('#4b5563')
        .font('Helvetica')
        .fontSize(8)
-       .text('MENTIONS LEGALES', 60, footerY + 10)
-       .text(ENTREPRISE_CONFIG.mentionTVA, 60, footerY + 25)
-       .text('Conditions de paiement : Paiement a reception', 60, footerY + 40)
-       .text('En cas de retard de paiement, une penalite de 3 fois le taux d\'interet legal sera appliquee,', 60, footerY + 55)
-       .text('ainsi qu\'une indemnite forfaitaire de 40 EUR pour frais de recouvrement.', 60, footerY + 67);
+       .text(ENTREPRISE_CONFIG.mentionTVA, 65, footerY + 28)
+       .text('Conditions de paiement : Paiement à réception', 65, footerY + 42)
+       .text('En cas de retard de paiement, une pénalité de 3 fois le taux d\'intérêt légal sera appliquée,', 65, footerY + 54)
+       .text('ainsi qu\'une indemnité forfaitaire de 40€ pour frais de recouvrement.', 65, footerY + 64);
 
     // ===== PIED DE PAGE =====
-    doc.fillColor('#9ca3af')
+    // Bande dorée en bas de page
+    doc.rect(0, 790, 595, 52).fill('#ca8a04');
+
+    doc.fillColor('#ffffff')
+       .font('Helvetica-Bold')
+       .fontSize(9)
+       .text('Merci pour votre confiance !', 50, 800, { align: 'center', width: 495 });
+
+    doc.fillColor('#fef3c7')
+       .font('Helvetica')
        .fontSize(8)
-       .text(`${ENTREPRISE_CONFIG.nom} - Micro-entreprise (EI) - ${ENTREPRISE_CONFIG.siret}`, 50, 800, { align: 'center', width: 495 });
+       .text(`${ENTREPRISE_CONFIG.nom} • Micro-entreprise (EI) • SIRET: ${ENTREPRISE_CONFIG.siret}`, 50, 815, { align: 'center', width: 495 });
 
     // Finaliser le PDF
     doc.end();

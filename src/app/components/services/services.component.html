@@ -274,7 +274,7 @@
             </li>
           </ul>
           <div class="border-t pt-4">
-            <p class="text-2xl font-bold text-beige-800 mb-1">À partir de 30€/h</p>
+            <p class="text-2xl font-bold text-gold-600 mb-1">À partir de 30€/h</p>
             <p class="text-sm text-gray-500 mb-4">ou forfait mensuel dès 500€</p>
 
             <!-- Sélecteur d'heures -->
@@ -284,7 +284,7 @@
                 <button
                   (click)="decrementHours(2); $event.stopPropagation()"
                   [disabled]="getService(2).selectedHours <= getService(2).minHours"
-                  class="w-10 h-10 rounded-full bg-white border-2 border-beige-400 text-beige-700 font-bold text-xl flex items-center justify-center hover:bg-beige-50 hover:border-beige-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
+                  class="w-10 h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
                   −
                 </button>
                 <div class="text-center flex-1">
@@ -294,12 +294,12 @@
                 <button
                   (click)="incrementHours(2); $event.stopPropagation()"
                   [disabled]="getService(2).selectedHours >= getService(2).maxHours"
-                  class="w-10 h-10 rounded-full bg-white border-2 border-beige-400 text-beige-700 font-bold text-xl flex items-center justify-center hover:bg-beige-50 hover:border-beige-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
+                  class="w-10 h-10 rounded-full bg-white border-2 border-gold-300 text-gold-600 font-bold text-xl flex items-center justify-center hover:bg-gold-50 hover:border-gold-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm">
                   +
                 </button>
               </div>
               <div class="text-center mt-3 py-2 bg-white rounded-lg">
-                <span class="text-xl font-bold text-beige-800">Total: {{ calculateTotal(2) }}€</span>
+                <span class="text-xl font-bold text-gold-600">Total: {{ calculateTotal(2) }}€</span>
               </div>
               <button
                 (click)="payHourly(2); $event.stopPropagation()"

@@ -60,10 +60,10 @@ const emailFooter = () => `
       Des questions ? Je suis là pour vous aider !
     </p>
     <div style="margin: 20px 0;">
-      <a href="${process.env.FRONTEND_URL}/#services" style="background: #ca8a04; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; margin: 5px;">
+      <a href="${process.env.FRONTEND_URL}#services" style="background: #ca8a04; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; margin: 5px;">
         Voir les services
       </a>
-      <a href="${process.env.FRONTEND_URL}/#booking" style="background: #374151; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; margin: 5px;">
+      <a href="${process.env.FRONTEND_URL}#booking" style="background: #374151; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; margin: 5px;">
         Prendre RDV
       </a>
     </div>
@@ -185,7 +185,7 @@ const emailTemplates = {
       <p style="color: #6b7280; margin: 0 0 15px 0; font-size: 14px;">
         Envie de revenir ? Vos données sont conservées pendant 30 jours.
       </p>
-      <a href="${process.env.FRONTEND_URL}/#services" style="background: #ca8a04; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
+      <a href="${process.env.FRONTEND_URL}#pricing" style="background: #ca8a04; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block;">
         Réactiver mon abonnement
       </a>
     </div>
@@ -223,7 +223,7 @@ const emailTemplates = {
     </div>
 
     <div style="text-align: center; margin: 30px 0;">
-      <a href="${process.env.FRONTEND_URL}/#services" style="background: #dc2626; color: white; padding: 15px 35px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; font-size: 16px;">
+      <a href="${process.env.FRONTEND_URL}#pricing" style="background: #dc2626; color: white; padding: 15px 35px; text-decoration: none; border-radius: 25px; font-weight: bold; display: inline-block; font-size: 16px;">
         🔄 Mettre à jour mes informations
       </a>
     </div>

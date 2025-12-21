@@ -15,7 +15,7 @@
  * ============================================================================
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
@@ -68,14 +68,33 @@ import { ProcessReworkComponent } from "./components/process-rework/process-rewo
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Mon Entreprise Landing';
   showSplash = true;
+  private initialHash: string | null = null;
 
   constructor(
     private seoService: SeoService,
     private analyticsService: AnalyticsService
-  ) {}
+  ) {
+    // Si l'URL contient un hash (ex: /#services), on skip le splash screen
+    if (typeof window !== 'undefined' && window.location.hash) {
+      this.showSplash = false;
+      this.initialHash = window.location.hash.substring(1); // Enlève le #
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // Si on a un hash initial, scroll vers la section après le rendu
+    if (this.initialHash) {
+      setTimeout(() => {
+        const element = document.getElementById(this.initialHash!);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // Petit délai pour s'assurer que le DOM est prêt
+    }
+  }
 
   onEnterSite(): void {
     this.showSplash = false;
