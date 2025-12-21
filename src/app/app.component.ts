@@ -34,7 +34,6 @@ import { AnalyticsService } from './services/analytics.service';
 import { WhoAmIComponent } from "./pages/who-am-i/who-am-i.component";
 import { RecognitionComponent } from "./components/recognition/recognition.component";
 import { SplashScreenComponent } from "./components/splash-screen/splash-screen.component";
-import { ProcessReworkComponent } from "./components/process-rework/process-rework.component";
 
 @Component({
   selector: 'app-root',
@@ -54,8 +53,7 @@ import { ProcessReworkComponent } from "./components/process-rework/process-rewo
     FooterComponent,
     WhoAmIComponent,
     RecognitionComponent,
-    SplashScreenComponent,
-    ProcessReworkComponent
+    SplashScreenComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
