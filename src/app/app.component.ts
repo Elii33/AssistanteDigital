@@ -87,12 +87,40 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // Si on a un hash initial, scroll vers la section après le rendu
     if (this.initialHash) {
+      // Attendre que la page soit complètement chargée
+      this.waitForPageLoadAndScroll(this.initialHash!);
+    }
+  }
+
+  private waitForPageLoadAndScroll(elementId: string): void {
+    // Attendre que le document soit complètement chargé
+    if (document.readyState === 'complete') {
+      // Page déjà chargée, attendre un délai supplémentaire pour les images
       setTimeout(() => {
-        const element = document.getElementById(this.initialHash!);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 500); // Délai augmenté pour s'assurer que tous les composants sont rendus
+        this.scrollToElement(elementId);
+      }, 1500);
+    } else {
+      // Attendre l'événement load
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          this.scrollToElement(elementId);
+        }, 1000);
+      });
+    }
+  }
+
+  private scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // Calculer la position avec offset pour le header fixe
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   }
 

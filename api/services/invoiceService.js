@@ -70,73 +70,76 @@ async function generateInvoicePDF(invoiceData) {
     doc.pipe(writeStream);
 
     // ===== EN-TÊTE =====
-    // Fond blanc/beige clair pour mettre en valeur le logo
-    doc.rect(0, 0, 595, 130).fill('#fefce8');
+    // Fond blanc crème pour mettre en valeur le logo
+    doc.rect(0, 0, 595, 140).fill('#fffbeb');
+
+    // Bordure dorée fine en haut
+    doc.rect(0, 0, 595, 4).fill('#ca8a04');
 
     // Bande décorative dorée en bas de l'en-tête
-    doc.rect(0, 120, 595, 10).fill('#ca8a04');
+    doc.rect(0, 130, 595, 10).fill('#ca8a04');
 
-    // Logo centré (si disponible)
+    // Logo centré (si disponible) - agrandi et bien centré
     if (fs.existsSync(logoPath)) {
       try {
-        doc.image(logoPath, 220, 10, { width: 150 });
+        doc.image(logoPath, 200, 20, { width: 180 });
       } catch (e) {
         console.warn('Impossible de charger le logo:', e.message);
       }
     }
 
-    // FACTURE badge avec fond
-    doc.roundedRect(420, 30, 130, 70, 8).fill('#92400e');
+    // FACTURE badge élégant à droite
+    doc.roundedRect(430, 35, 120, 60, 6).fill('#92400e');
 
     doc.fillColor('#ffffff')
-       .fontSize(20)
+       .fontSize(18)
        .font('Helvetica-Bold')
-       .text('FACTURE', 425, 45, { align: 'center', width: 120 });
+       .text('FACTURE', 435, 48, { align: 'center', width: 110 });
 
-    doc.fontSize(10)
+    doc.fontSize(9)
        .font('Helvetica')
        .fillColor('#fef3c7')
-       .text(`N° ${invoiceNumber}`, 425, 72, { align: 'center', width: 120 });
+       .text(`N° ${invoiceNumber}`, 435, 72, { align: 'center', width: 110 });
 
     // ===== INFORMATIONS ENTREPRISE & CLIENT =====
 
-    // Box Émetteur avec bordure dorée
-    doc.rect(50, 145, 240, 110).fill('#fefce8').stroke('#ca8a04');
+    // Box Émetteur avec bordure dorée et ombre
+    doc.roundedRect(50, 160, 240, 115, 6).fill('#ffffff').stroke('#ca8a04');
 
     doc.fillColor('#ca8a04')
        .fontSize(11)
        .font('Helvetica-Bold')
-       .text('ÉMETTEUR', 60, 155);
+       .text('ÉMETTEUR', 65, 172);
 
     doc.font('Helvetica')
        .fontSize(9)
        .fillColor('#4b5563')
-       .text(ENTREPRISE_CONFIG.nom, 60, 172)
-       .text(ENTREPRISE_CONFIG.adresse, 60, 186)
-       .text(`${ENTREPRISE_CONFIG.codePostal} ${ENTREPRISE_CONFIG.ville}`, 60, 200)
-       .text(`SIRET: ${ENTREPRISE_CONFIG.siret}`, 60, 214)
-       .text(`Email: ${ENTREPRISE_CONFIG.email}`, 60, 228)
-       .text(`Tél: ${ENTREPRISE_CONFIG.telephone}`, 60, 242);
+       .text(ENTREPRISE_CONFIG.nom, 65, 190)
+       .text(ENTREPRISE_CONFIG.adresse, 65, 204)
+       .text(`${ENTREPRISE_CONFIG.codePostal} ${ENTREPRISE_CONFIG.ville}`, 65, 218)
+       .text(`SIRET: ${ENTREPRISE_CONFIG.siret}`, 65, 232)
+       .text(`Email: ${ENTREPRISE_CONFIG.email}`, 65, 246)
+       .text(`Tél: ${ENTREPRISE_CONFIG.telephone}`, 65, 260);
 
-    // Box Destinataire avec bordure grise
-    doc.rect(310, 145, 235, 110).fill('#f9fafb').stroke('#d1d5db');
+    // Box Destinataire avec bordure grise élégante
+    doc.roundedRect(310, 160, 235, 115, 6).fill('#f9fafb').stroke('#d1d5db');
 
     doc.fillColor('#374151')
        .font('Helvetica-Bold')
        .fontSize(11)
-       .text('DESTINATAIRE', 320, 155);
+       .text('DESTINATAIRE', 325, 172);
 
     doc.font('Helvetica')
        .fontSize(9)
        .fillColor('#4b5563')
-       .text(customerName || 'Client', 320, 172)
-       .text(customerEmail, 320, 186);
+       .text(customerName || 'Client', 325, 190)
+       .text(customerEmail, 325, 204);
 
     if (customerAddress) {
       const addressLines = customerAddress.split('\n');
-      let yPos = 200;
+      let yPos = 218;
       addressLines.forEach(line => {
-        doc.text(line, 320, yPos);
+        doc.text(line, 325, yPos);
         yPos += 14;
       });
     }
@@ -145,13 +148,13 @@ async function generateInvoicePDF(invoiceData) {
     doc.fillColor('#ca8a04')
        .font('Helvetica-Bold')
        .fontSize(9)
-       .text('Date:', 320, 242);
+       .text('Date:', 325, 260);
     doc.font('Helvetica')
        .fillColor('#4b5563')
-       .text(date || new Date().toLocaleDateString('fr-FR'), 355, 242);
+       .text(date || new Date().toLocaleDateString('fr-FR'), 360, 260);
 
     // ===== TABLEAU DES PRESTATIONS =====
-    const tableTop = 280;
+    const tableTop = 295;
 
     // En-tête du tableau avec fond doré
     doc.rect(50, tableTop, 495, 32).fill('#ca8a04');
