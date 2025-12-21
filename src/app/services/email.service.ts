@@ -5,10 +5,10 @@ import emailjs from '@emailjs/browser';
   providedIn: 'root'
 })
 export class EmailService {
-  // Clés EmailJS - Configuré pour ElisAssist
-  private serviceId = 'service_ugrbmwr';
-  private templateId = 'template_3uz2spk';
-  private publicKey = 'pdsy07zUPUZgThsFh';
+  // Clés EmailJS - Configuré pour ElisAssist (elisassist@gmail.com)
+  private serviceId = 'service_t9lantb';
+  private templateId = 'template_bqlmekt';
+  private publicKey = 'HC4pfuX9Q66-bNzqU';
 
   constructor() {
     // Initialiser EmailJS avec votre clé publique
