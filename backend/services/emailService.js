@@ -49,7 +49,7 @@ async function notifyAdmin(subject, message) {
 // ====== TEMPLATES D'EMAILS PROFESSIONNELS ======
 const emailHeader = () => `
   <div style="background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-    <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">✨ Elilouche</h1>
+    <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">✨ Elisassist ✨</h1>
     <p style="color: rgba(255,255,255,0.9); margin: 5px 0 0 0; font-size: 14px;">Assistante Digitale</p>
   </div>
 `;
@@ -69,7 +69,7 @@ const emailFooter = () => `
     </div>
     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef;">
       <p style="color: #9ca3af; font-size: 12px; margin: 0;">
-        © ${new Date().getFullYear()} Elilouche Assistante Digitale<br>
+        © ${new Date().getFullYear()} Elisassist - Assistante Digitale<br>
         Micro-entreprise (EI) • TVA non applicable, art. 293 B du CGI
       </p>
     </div>
@@ -137,7 +137,7 @@ const emailTemplates = {
     ` : ''}
 
     <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin: 25px 0;">
-      <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 16px;">🚀 Prochaines étapes</h3>
+      <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 16px;">📋 Prochaines étapes</h3>
       <ol style="color: #15803d; margin: 0; padding-left: 20px; line-height: 1.8;">
         <li>Je vous contacte sous 24-48h pour faire connaissance</li>
         <li>On définit ensemble vos besoins prioritaires</li>
@@ -353,7 +353,7 @@ const emailTemplates = {
     ` : ''}
 
     <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin: 25px 0;">
-      <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 16px;">🚀 Et maintenant ?</h3>
+      <h3 style="color: #166534; margin: 0 0 10px 0; font-size: 16px;">📋 Et maintenant ?</h3>
       <p style="color: #15803d; margin: 0; line-height: 1.8;">
         Je vous contacte très rapidement pour organiser notre collaboration et planifier vos ${hours} heures de travail selon vos disponibilités.
       </p>

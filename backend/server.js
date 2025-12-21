@@ -41,7 +41,9 @@ app.use(cors({
 // IMPORTANT: Le webhook doit recevoir le body brut AVANT le parsing JSON
 app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = process.env.STRIPE_MODE === 'live'
+    ? process.env.STRIPE_WEBHOOK_SECRET_LIVE
+    : process.env.STRIPE_WEBHOOK_SECRET_TEST;
 
   if (!webhookSecret) {
     console.warn('⚠️  Webhook secret non configuré - Mode développement');
@@ -201,20 +203,24 @@ app.use((req, res, next) => {
   next();
 });
 
+// ====== HELPER POUR LE MODE TEST/LIVE ======
+const isLiveMode = process.env.STRIPE_MODE === 'live';
+const getPriceId = (testKey, liveKey) => isLiveMode ? process.env[liveKey] : process.env[testKey];
+
 // ====== CONFIGURATION DES PLANS ======
 const pricingPlans = {
   essential: {
-    priceId: process.env.PRICE_ID_ESSENTIAL,
+    priceId: getPriceId('PRICE_ID_ESSENTIAL_TEST', 'PRICE_ID_ESSENTIAL_LIVE'),
     name: 'Pack Starter',
     mode: 'subscription'
   },
   pro: {
-    priceId: process.env.PRICE_ID_PRO,
+    priceId: getPriceId('PRICE_ID_PRO_TEST', 'PRICE_ID_PRO_LIVE'),
     name: 'Pack Pro',
     mode: 'subscription'
   },
   premium: {
-    priceId: process.env.PRICE_ID_PREMIUM,
+    priceId: getPriceId('PRICE_ID_PREMIUM_TEST', 'PRICE_ID_PREMIUM_LIVE'),
     name: 'Pack Premium',
     mode: 'subscription'
   }
@@ -223,19 +229,19 @@ const pricingPlans = {
 // Configuration des services horaires
 const hourlyServices = {
   admin: {
-    priceId: process.env.PRICE_ID_HOURLY_ADMIN,
+    priceId: getPriceId('PRICE_ID_HOURLY_ADMIN_TEST', 'PRICE_ID_HOURLY_ADMIN_LIVE'),
     name: 'Gestion Administrative',
     minHours: 1,
     maxHours: 40
   },
   automation: {
-    priceId: process.env.PRICE_ID_HOURLY_AUTOMATION,
+    priceId: getPriceId('PRICE_ID_HOURLY_AUTOMATION_TEST', 'PRICE_ID_HOURLY_AUTOMATION_LIVE'),
     name: 'Automatisation & Design',
     minHours: 1,
     maxHours: 40
   },
   social: {
-    priceId: process.env.PRICE_ID_HOURLY_SOCIAL,
+    priceId: getPriceId('PRICE_ID_HOURLY_SOCIAL_TEST', 'PRICE_ID_HOURLY_SOCIAL_LIVE'),
     name: 'Gestion Réseaux Sociaux',
     minHours: 1,
     maxHours: 40

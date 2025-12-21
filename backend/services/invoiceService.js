@@ -16,13 +16,13 @@ const path = require('path');
 
 // ====== CONFIGURATION ENTREPRISE (pour les factures) ======
 const ENTREPRISE_CONFIG = {
-  nom: 'Elilouche Assistante Digitale',
+  nom: 'Elisassist Assistante Digitale',
   adresse: '123 Rue Example',
   codePostal: '75000',
   ville: 'Paris',
-  siret: 'XXX XXX XXX XXXXX',
-  email: process.env.EMAIL_USER || 'contact@example.com',
-  telephone: '06 XX XX XX XX',
+  siret: '879 865 160 00029',
+  email: process.env.EMAIL_USER || 'elisassist@gmail.com',
+  telephone: '06 64 66 93 63',
   mentionTVA: 'TVA non applicable, art. 293 B du CGI'
 };
 
@@ -73,7 +73,7 @@ async function generateInvoicePDF(invoiceData) {
     doc.fillColor('#ffffff')
        .fontSize(28)
        .font('Helvetica-Bold')
-       .text('Elilouche', 50, 35);
+       .text('Elisassist', 50, 35);
 
     doc.fontSize(14)
        .font('Helvetica')
